@@ -71,29 +71,32 @@ class FilesController extends Controller
     {
         $modelsOptionValue = [new Files];
         if (Yii::$app->request->post()) {
+//            vd(Yii::$app->request->post());
             $modelsOptionValue = \backend\models\Model::createMultiple(Files::className());
             if (Model::loadMultiple($modelsOptionValue, Yii::$app->request->post())){
                 vd($modelsOptionValue->errors);
-//                foreach ($modelsOptionValue as $index => $modelOptionValue) {
-////                    $modelOptionValue->file_name = \yii\web\UploadedFile::getInstance($modelOptionValue, "[{$index}]file_name");
-//                }
+                foreach ($modelsOptionValue as $index => $modelOptionValue) {
+                    $modelOptionValue->file_name = \yii\web\UploadedFile::getInstance($modelOptionValue, "[{$index}]file_name");
+                }
+            }
+            if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ActiveForm::validateMultiple($modelsOptionValue);
             }
 
-//            if (Yii::$app->request->isAjax) {
-//                Yii::$app->response->format = Response::FORMAT_JSON;
-//                return ActiveForm::validateMultiple($modelsOptionValue);
-//            }
-
-            $transaction = \Yii::$app->db->beginTransaction();
-            try {
-                    foreach ($modelsOptionValue as $modelOptionValue) {
-                        if (($modelOptionValue->save(false)) === false) {
-                            $transaction->rollBack();
-                            break;
+            $valid = Model::validateMultiple($modelsOptionValue);
+            if ($valid){
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                        foreach ($modelsOptionValue as $modelOptionValue) {
+                            if (($modelOptionValue->save(false)) === false) {
+                                $transaction->rollBack();
+                                break;
+                            }
                         }
-                    }
-            } catch (\Exception $e) {
-                $transaction->rollBack();
+                } catch (\Exception $e) {
+                    $transaction->rollBack();
+                }
             }
         }
 
