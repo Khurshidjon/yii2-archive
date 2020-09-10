@@ -12,6 +12,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 use backend\models\Model;
+//use yii\base\Model;
 
 /**
  * FilesController implements the CRUD actions for Files model.
@@ -69,36 +70,30 @@ class FilesController extends Controller
     public function actionCreate()
     {
         $modelsOptionValue = [new Files];
-
         if (Yii::$app->request->post()) {
-            $modelsOptionValue = Model::createMultiple(Files::classname());
-            Model::loadMultiple($modelsOptionValue, Yii::$app->request->post());
-            foreach ($modelsOptionValue as $index => $modelOptionValue) {
-                $modelOptionValue->sort_order = $index;
-                $modelOptionValue->img = \yii\web\UploadedFile::getInstance($modelOptionValue, "[{$index}]img");
+            $modelsOptionValue = \backend\models\Model::createMultiple(Files::className());
+            if (Model::loadMultiple($modelsOptionValue, Yii::$app->request->post())){
+                vd($modelsOptionValue->errors);
+//                foreach ($modelsOptionValue as $index => $modelOptionValue) {
+////                    $modelOptionValue->file_name = \yii\web\UploadedFile::getInstance($modelOptionValue, "[{$index}]file_name");
+//                }
             }
 
-            // ajax validation
-            if (Yii::$app->request->isAjax) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return ActiveForm::validateMultiple($modelsOptionValue);
-            }
+//            if (Yii::$app->request->isAjax) {
+//                Yii::$app->response->format = Response::FORMAT_JSON;
+//                return ActiveForm::validateMultiple($modelsOptionValue);
+//            }
 
-            // validate all models
-            $valid = Model::validateMultiple($modelsOptionValue);
-
-            if ($valid) {
-                $transaction = \Yii::$app->db->beginTransaction();
-                try {
-                        foreach ($modelsOptionValue as $modelOptionValue) {
-                            if (($flag = $modelOptionValue->save(false)) === false) {
-                                $transaction->rollBack();
-                                break;
-                            }
+            $transaction = \Yii::$app->db->beginTransaction();
+            try {
+                    foreach ($modelsOptionValue as $modelOptionValue) {
+                        if (($modelOptionValue->save(false)) === false) {
+                            $transaction->rollBack();
+                            break;
                         }
-                } catch (\Exception $e) {
-                    $transaction->rollBack();
-                }
+                    }
+            } catch (\Exception $e) {
+                $transaction->rollBack();
             }
         }
 

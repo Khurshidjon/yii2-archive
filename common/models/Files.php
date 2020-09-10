@@ -44,10 +44,11 @@ class Files extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['folder_id', 'category_id', 'type_id', 'document_date', 'created_at', 'updated_at'], 'integer'],
+            [['folder_id', 'category_id', 'document_date'], 'integer'],
+            [['file_name'], 'required'],
             [['document_description'], 'string'],
-            [['title', 'file_cover', 'document_number', 'document_author', 'file_name', 'file_path'], 'string', 'max' => 255],
-            [['file_size', 'file_extension'], 'string', 'max' => 45],
+            [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
+            [['file_name'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['folder_id'], 'exist', 'skipOnError' => true, 'targetClass' => Folders::className(), 'targetAttribute' => ['folder_id' => 'id']],
         ];
