@@ -14,6 +14,7 @@ class AppAssetBackendArchive extends AssetBundle
     public $baseUrl = '@web/template/assets';
     public $css = [
         'css/main.css',
+        'css/style.css',
     ];
     public $js = [
         'scripts/main.js',

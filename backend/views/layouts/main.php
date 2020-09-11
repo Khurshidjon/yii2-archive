@@ -593,7 +593,11 @@ AppAssetBackendArchive::register($this);
                 </div>
             </div>
             <div class="app-main__outer">
-                <div class="container-fluid h-auto">
+                <div class="container-fluid h-auto mt-4">
+                    <?= \yii\bootstrap4\Breadcrumbs::widget([
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    ]) ?>
+                    <?= \yii\bootstrap4\Alert::widget() ?>
                     <?=$content?>
                 </div>
                 <div class="app-wrapper-footer">

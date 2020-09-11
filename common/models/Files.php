@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "files".
@@ -45,7 +46,6 @@ class Files extends \yii\db\ActiveRecord
     {
         return [
             [['folder_id', 'category_id', 'document_date'], 'integer'],
-            [['file_name'], 'required'],
             [['document_description'], 'string'],
             [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
             [['file_name'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
@@ -79,6 +79,25 @@ class Files extends \yii\db\ActiveRecord
         ];
     }
 
+
+    public function upload($db_path)
+    {
+        $base_directory = Yii::getAlias('@frontend/web');
+        $new_directory = $base_directory.$db_path;
+        if($this->file_name != null){
+            if(!is_dir($new_directory)) {
+                mkdir($new_directory, 0777, true);
+            }
+
+            $filename = 'model_id_'.$this->id.'_'.$this->file_name->baseName;
+            $file_dir = $new_directory .'/'. $filename;
+            $this->file_name = UploadedFile::getInstance($this, "file_name");
+//            vd($this->size);
+            $this->file_name->saveAs($file_dir . '.' . $this->file_name->extension);
+            $this->save(false);
+        }
+    }
+
     /**
      * Gets query for [[FileLanguages]].
      *
@@ -107,5 +126,13 @@ class Files extends \yii\db\ActiveRecord
     public function getFolder()
     {
         return $this->hasOne(Folders::className(), ['id' => 'folder_id']);
+    }
+
+    public static function deleteByIDs($deletedIDs)
+    {
+        $model = Files::find()->where(['in', 'id', $deletedIDs])->all();
+        foreach ($model as $value){
+            $value->delete();
+        }
     }
 }

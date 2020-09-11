@@ -78,9 +78,6 @@ use wbraganca\dynamicform\DynamicFormWidget;
                     <td>
                         <div class="row">
                             <div class="col-md-12">
-                                <?php if (!$modelOptionValue->isNewRecord): ?>
-                                    <?= Html::activeHiddenInput($modelOptionValue, "[{$index}]id"); ?>
-                                <?php endif; ?>
                                 <?php
                                 $modelImage = \common\models\Files::findOne($modelOptionValue->id);
                                 $initialPreview = [];
@@ -89,9 +86,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                         $initialPreview[] = Html::img($pathImg, ['class' => 'file-preview-image']);
                                     }
                                 ?>
-                                <?= $form->field($modelOptionValue, "[{$index}]file_name")->label(false)->fileInput();?>
-
-                                <?/*= $form->field($modelOptionValue, "[{$index}]file_name")->label(false)->widget(FileInput::classname(), [
+                                <?= $form->field($modelOptionValue, "[{$index}]file_name")->label(false)->widget(FileInput::classname(), [
                                     'options' => [
                                         'multiple' => false,
 //                                        'accept' => 'image/*',
@@ -131,7 +126,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
 //                                        'initialPreview' => $initialPreview,
                                         'layoutTemplates' => ['footer' => '']
                                     ]
-                                ]) */?>
+                                ]) ?>
                             </div>
                         </div>
                     </td>

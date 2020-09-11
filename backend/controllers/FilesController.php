@@ -8,11 +8,10 @@ use backend\models\search\FilesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\helpers\ArrayHelper;
 use yii\web\Response;
+use yii\web\UploadedFile;
 use yii\widgets\ActiveForm;
 use backend\models\Model;
-//use yii\base\Model;
 
 /**
  * FilesController implements the CRUD actions for Files model.
@@ -71,33 +70,21 @@ class FilesController extends Controller
     {
         $modelsOptionValue = [new Files];
         if (Yii::$app->request->post()) {
-//            vd(Yii::$app->request->post());
             $modelsOptionValue = \backend\models\Model::createMultiple(Files::className());
-            if (Model::loadMultiple($modelsOptionValue, Yii::$app->request->post())){
-                vd($modelsOptionValue->errors);
-                foreach ($modelsOptionValue as $index => $modelOptionValue) {
-                    $modelOptionValue->file_name = \yii\web\UploadedFile::getInstance($modelOptionValue, "[{$index}]file_name");
-                }
-            }
+
             if (Yii::$app->request->isAjax) {
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 return ActiveForm::validateMultiple($modelsOptionValue);
             }
 
-            $valid = Model::validateMultiple($modelsOptionValue);
-            if ($valid){
-                $transaction = \Yii::$app->db->beginTransaction();
-                try {
-                        foreach ($modelsOptionValue as $modelOptionValue) {
-                            if (($modelOptionValue->save(false)) === false) {
-                                $transaction->rollBack();
-                                break;
-                            }
-                        }
-                } catch (\Exception $e) {
-                    $transaction->rollBack();
-                }
+            Model::loadMultiple($modelsOptionValue, Yii::$app->request->post());
+            foreach ($modelsOptionValue as $index => $modelOptionValue) {
+                $db_path = '/files/'.date('Y').'/'.date('m').'/'.date('d');
+                $modelOptionValue->file_name = UploadedFile::getInstance($modelOptionValue, "[{$index}]file_name");
+                $modelOptionValue->upload($db_path);
+                $modelOptionValue->save(false);
             }
+            return $this->redirect(['/files']);
         }
 
         return $this->render('create', [
@@ -114,68 +101,30 @@ class FilesController extends Controller
      */
     public function actionUpdate($id)
     {
-        $modelCatalogOption = $this->findModel($id);
-        $modelsOptionValue = $modelCatalogOption->optionValues;
-
-        if ($modelCatalogOption->load(Yii::$app->request->post())) {
-
-            $oldIDs = ArrayHelper::map($modelsOptionValue, 'id', 'id');
-            $modelsOptionValue = Model::createMultiple(OptionValue::classname(), $modelsOptionValue);
-            Model::loadMultiple($modelsOptionValue, Yii::$app->request->post());
-            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsOptionValue, 'id', 'id')));
-
-            foreach ($modelsOptionValue as $index => $modelOptionValue) {
-                $modelOptionValue->sort_order = $index;
-                $modelOptionValue->img = \yii\web\UploadedFile::getInstance($modelOptionValue, "[{$index}]img");
-            }
-
-            // ajax validation
-            if (Yii::$app->request->isAjax) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return ArrayHelper::merge(
-                    ActiveForm::validateMultiple($modelsOptionValue),
-                    ActiveForm::validate($modelCatalogOption)
-                );
-            }
-
-            // validate all models
-            $valid = $modelCatalogOption->validate();
-            $valid = Model::validateMultiple($modelsOptionValue) && $valid;
-
-            if ($valid) {
-                $transaction = \Yii::$app->db->beginTransaction();
-                try {
-                    if ($flag = $modelCatalogOption->save(false)) {
-
-                        if (!empty($deletedIDs)) {
-                            $flag = OptionValue::deleteByIDs($deletedIDs);
-                        }
-
-                        if ($flag) {
-                            foreach ($modelsOptionValue as $modelOptionValue) {
-                                $modelOptionValue->catalog_option_id = $modelCatalogOption->id;
-                                if (($flag = $modelOptionValue->save(false)) === false) {
-                                    $transaction->rollBack();
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if ($flag) {
-                        $transaction->commit();
-                        return $this->redirect(['view', 'id' => $modelCatalogOption->id]);
-                    }
-
-                } catch (Exception $e) {
-                    $transaction->rollBack();
+        $modelOptionValue = $this->findModel($id);
+        if (Yii::$app->request->post()) {
+            $modelOptionValue->load(Yii::$app->request->post());
+            $file = UploadedFile::getInstance($modelOptionValue, "file_name");
+            if ($file != null)
+            {
+                $modelOptionValue->file_name = $file;
+                $db_path = $modelOptionValue->file_path;
+                if ($db_path == null) {
+                    $db_path = '/files/'.date('Y').'/'.date('m').'/'.date('d');
+                }
+                $modelOptionValue->upload($db_path);
+                if ($file != null){
+                    $modelOptionValue->file_path = $db_path;
+                    $modelOptionValue->file_size = $file->size;
+                    $modelOptionValue->file_extension = $file->extension;
                 }
             }
-        }
 
+            $modelOptionValue->update(false);
+            return $this->redirect(['/files']);
+        }
         return $this->render('update', [
-            'modelCatalogOption' => $modelCatalogOption,
-            'modelsOptionValue' => (empty($modelsOptionValue)) ? [new OptionValue] : $modelsOptionValue
+            'modelOptionValue' => $modelOptionValue
         ]);
     }
 
@@ -189,9 +138,7 @@ class FilesController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        $optonValuesIDs = ArrayHelper::map($model->optionValues, 'id', 'id');
-        Files::deleteByIDs($optonValuesIDs);
-        $name = $model->name;
+        $name = $model->title;
 
         if ($model->delete()) {
             Yii::$app->session->setFlash('success', 'Record  <strong>"' . $name . '"</strong> deleted successfully.');

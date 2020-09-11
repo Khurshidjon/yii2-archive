@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
         'validateOnChange' => true,
         'validateOnBlur' => false,
         'options' => [
-//            'enctype' => 'multipart/form-data',
+            'enctype' => 'multipart/form-data',
             'id' => 'dynamic-book-form'
         ]
     ]); ?>
