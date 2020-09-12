@@ -42,8 +42,11 @@ $this->params['breadcrumbs'][] = 'Update';
                 </td>
                 <td class="vcenter">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-9">
                             <?= $form->field($modelOptionValue, "title")->textInput(['maxlength' => 128]); ?>
+                        </div>
+                        <div class="col-md-3">
+                            <?= $form->field($modelOptionValue, "file_page_count")->textInput(['maxlength' => 128]); ?>
                         </div>
                         <div class="col-md-6">
                             <?= $form->field($modelOptionValue, "folder_id")->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Folders::find()->all(), 'id', 'title'), ['prompt' => 'Пожалуйста выберите']) ?>
@@ -76,11 +79,15 @@ $this->params['breadcrumbs'][] = 'Update';
                             $modelFile = \common\models\Files::findOne($modelOptionValue->id);
                             $initialPreview = [];
                             if ($modelFile) {
-                                $pathImg =  'http://front.archive.loc' .$modelFile->file_path .'/model_id_'.$modelOptionValue->id.'_'.$modelFile->file_name;
+                                $pathFile =  'http://front.archive.loc' .$modelFile->file_path.'/'.$modelFile->file_name;
                                 if (in_array($modelFile->file_extension, array("jpg", "png", "jpeg", "JPG", "PNG", "JPEG"))){
-                                    $initialPreview[] = Html::img($pathImg, ['class' => 'w-100']);
+                                    $initialPreview[] = Html::img($pathFile, ['class' => 'w-100']);
                                 }elseif (in_array($modelFile->file_extension, array("mp4", "mov", "avi"))){
-                                    $initialPreview[] = '<video src="'. $pathImg .'" class="w-100" controls height="160"></video>';
+                                    $initialPreview[] = '<video src="'. $pathFile .'" class="w-100" controls height="160"></video>';
+                                }elseif ($modelFile->file_extension == 'pdf'){
+                                    $initialPreview[] = '<iframe class="w-100" src="' . $pathFile .'"></iframe>';
+                                }elseif ($modelFile->file_extension == 'docx'){
+                                    $initialPreview[] = '<iframe class="w-100" src="' . $pathFile .'"></iframe>';
                                 }else{
                                     $initialPreview[] = Yii::$app->params['previewFileIconSettings'][$modelFile->file_extension];
                                 }
@@ -106,7 +113,8 @@ $this->params['breadcrumbs'][] = 'Update';
                                     'removeLabel' => ' Удалить',
                                     'removeIcon' => '<i class="fas fa-trash"></i>',
                                     'previewSettings' => [
-//                                    'image' => ['width' => '138px', 'height' => 'auto']
+                                        'image' => ['width' => '208px', 'height' => 'auto'],
+//                                        'video' => ['width' => '248px', 'height' => 'auto'],
                                     ],
                                     'previewFileIconSettings' => [
                                         'doc' => '<i class="fas fa-file-word text-primary"></i>',
@@ -123,7 +131,7 @@ $this->params['breadcrumbs'][] = 'Update';
                                         'mp3' => '<i class="fas fa-file-audio text-warning"></i>',
                                         'jpg' => '<i class="fas fa-file-photo text-warning"></i>',
                                     ],
-                                        'initialPreview' => $initialPreview,
+                                    'initialPreview' => $initialPreview,
                                     'layoutTemplates' => ['footer' => '']
                                 ]
                             ]) ?>

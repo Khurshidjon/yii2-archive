@@ -8,7 +8,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
 
     <div id="panel-option-values" class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><i class="fas fa-check-square-o"></i> Option values</h3>
+            <h3 class="panel-title"><i class="fas fa-file-archive"></i> Option values</h3>
         </div>
         <?php DynamicFormWidget::begin([
             'widgetContainer' => 'dynamicform_wrapper',
@@ -36,6 +36,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                 <tr>
                     <th></th>
                     <th>Option value name</th>
+                    <th>Option value name</th>
                     <th>Image</th>
                     <th>Actions</th>
                 </tr>
@@ -48,8 +49,11 @@ use wbraganca\dynamicform\DynamicFormWidget;
                     </td>
                     <td class="vcenter">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-9">
                                 <?= $form->field($modelOptionValue, "[{$index}]title")->textInput(['maxlength' => 128]); ?>
+                            </div>
+                            <div class="col-md-3">
+                                <?= $form->field($modelOptionValue, "[{$index}]file_page_count")->textInput(['maxlength' => 128]); ?>
                             </div>
                             <div class="col-md-6">
                                 <?= $form->field($modelOptionValue, "[{$index}]folder_id")->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Folders::find()->all(), 'id', 'title'), ['prompt' => 'Пожалуйста выберите']) ?>
@@ -65,7 +69,17 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                 <?= $form->field($modelOptionValue, "[{$index}]document_number")->textInput(['maxlength' => true]) ?>
                             </div>
                             <div class="col-md-4">
-                                <?= $form->field($modelOptionValue, "[{$index}]document_date")->textInput(['maxlength' => true]) ?>
+                                <?= $form->field($modelOptionValue, "[{$index}]document_date")->textInput()?>
+                                <?php /*$form->field($modelOptionValue, "[{$index}]document_date")->widget(\kartik\date\DatePicker::className(), [
+                                        'options' => [
+                                            'autocomplete'=>'off',
+                                            'readOnly'=>true,
+                                            'style' => 'background:white'
+                                        ],
+                                        'pluginOptions' => [
+                                                'autocomplete' => false
+                                        ]
+                                ]) */?>
                             </div>
                             <div class="col-md-4">
                                 <?= $form->field($modelOptionValue, "[{$index}]document_author")->textInput(['maxlength' => true]) ?>
@@ -79,12 +93,18 @@ use wbraganca\dynamicform\DynamicFormWidget;
                         <div class="row">
                             <div class="col-md-12">
                                 <?php
-                                $modelImage = \common\models\Files::findOne($modelOptionValue->id);
+                                $modelFile = \common\models\Files::findOne($modelOptionValue->id);
                                 $initialPreview = [];
-                                    if ($modelImage) {
-                                        $pathImg = $modelImage->file_path;
-                                        $initialPreview[] = Html::img($pathImg, ['class' => 'file-preview-image']);
+                                if ($modelFile) {
+                                    $pathImg =  'http://front.archive.loc' .$modelFile->file_path .'/'.$modelFile->file_name;
+                                    if (in_array($modelFile->file_extension, array("jpg", "png", "jpeg", "JPG", "PNG", "JPEG"))){
+                                        $initialPreview[] = Html::img($pathImg, ['class' => 'w-100']);
+                                    }elseif (in_array($modelFile->file_extension, array("mp4", "mov", "avi"))){
+                                        $initialPreview[] = '<video src="'. $pathImg .'" class="w-100" controls height="160"></video>';
+                                    }else{
+                                        $initialPreview[] = Yii::$app->params['previewFileIconSettings'][$modelFile->file_extension];
                                     }
+                                }
                                 ?>
                                 <?= $form->field($modelOptionValue, "[{$index}]file_name")->label(false)->widget(FileInput::classname(), [
                                     'options' => [

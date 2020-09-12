@@ -76,12 +76,10 @@ class FilesController extends Controller
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 return ActiveForm::validateMultiple($modelsOptionValue);
             }
-
             Model::loadMultiple($modelsOptionValue, Yii::$app->request->post());
             foreach ($modelsOptionValue as $index => $modelOptionValue) {
-                $db_path = '/files/'.date('Y').'/'.date('m').'/'.date('d');
-                $modelOptionValue->file_name = UploadedFile::getInstance($modelOptionValue, "[{$index}]file_name");
-                $modelOptionValue->upload($db_path);
+                $file = UploadedFile::getInstance($modelOptionValue, "[{$index}]file_name");
+                $modelOptionValue->upload($file);
                 $modelOptionValue->save(false);
             }
             return $this->redirect(['/files']);
@@ -102,25 +100,11 @@ class FilesController extends Controller
     public function actionUpdate($id)
     {
         $modelOptionValue = $this->findModel($id);
-        if (Yii::$app->request->post()) {
-            $modelOptionValue->load(Yii::$app->request->post());
+        if ($modelOptionValue->load(Yii::$app->request->post())) {
             $file = UploadedFile::getInstance($modelOptionValue, "file_name");
-            if ($file != null)
-            {
-                $modelOptionValue->file_name = $file;
-                $db_path = $modelOptionValue->file_path;
-                if ($db_path == null) {
-                    $db_path = '/files/'.date('Y').'/'.date('m').'/'.date('d');
-                }
-                $modelOptionValue->upload($db_path);
-                if ($file != null){
-                    $modelOptionValue->file_path = $db_path;
-                    $modelOptionValue->file_size = $file->size;
-                    $modelOptionValue->file_extension = $file->extension;
-                }
+            if($modelOptionValue->save(false)){
+                $modelOptionValue->upload($file);
             }
-
-            $modelOptionValue->update(false);
             return $this->redirect(['/files']);
         }
         return $this->render('update', [

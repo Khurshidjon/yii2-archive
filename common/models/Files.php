@@ -12,6 +12,8 @@ use yii\web\UploadedFile;
  * @property int|null $folder_id
  * @property int|null $category_id
  * @property int|null $type_id
+ * @property int|null $view_count
+ * @property int|null $download_count
  * @property string|null $title
  * @property string|null $file_cover Обложка файла
  * @property string|null $document_number
@@ -22,6 +24,7 @@ use yii\web\UploadedFile;
  * @property string|null $file_size
  * @property string|null $file_extension
  * @property string|null $file_path
+ * @property string|null $file_page_count
  * @property int|null $created_at
  * @property int|null $updated_at
  *
@@ -45,7 +48,7 @@ class Files extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['folder_id', 'category_id', 'document_date'], 'integer'],
+            [['folder_id', 'category_id', 'document_date', 'view_count', 'download_count', 'file_page_count'], 'integer'],
             [['document_description'], 'string'],
             [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
             [['file_name'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
@@ -80,21 +83,24 @@ class Files extends \yii\db\ActiveRecord
     }
 
 
-    public function upload($db_path)
+    public function upload($file)
     {
         $base_directory = Yii::getAlias('@frontend/web');
+        $db_path = '/files/'.date('Y').'/'.date('m').'/'.date('d');
         $new_directory = $base_directory.$db_path;
-        if($this->file_name != null){
-            if(!is_dir($new_directory)) {
-                mkdir($new_directory, 0777, true);
-            }
-
-            $filename = 'model_id_'.$this->id.'_'.$this->file_name->baseName;
+        if(!is_dir($new_directory)) {
+            mkdir($new_directory, 0777, true);
+        }
+        if($file != null){
+            $filename = $file->baseName;
             $file_dir = $new_directory .'/'. $filename;
-            $this->file_name = UploadedFile::getInstance($this, "file_name");
-//            vd($this->size);
-            $this->file_name->saveAs($file_dir . '.' . $this->file_name->extension);
-            $this->save(false);
+            $this->file_name = $file->name;
+            $this->file_size = $file->size;
+            $this->file_path = $db_path;
+            $this->file_extension = $file->extension;
+            if ($this->save(false)){
+                $file->saveAs($file_dir . '.' . $file->extension);
+            }
         }
     }
 

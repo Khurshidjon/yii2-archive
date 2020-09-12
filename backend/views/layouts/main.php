@@ -597,7 +597,6 @@ AppAssetBackendArchive::register($this);
                     <?= \yii\bootstrap4\Breadcrumbs::widget([
                         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                     ]) ?>
-                    <?= \yii\bootstrap4\Alert::widget() ?>
                     <?=$content?>
                 </div>
                 <div class="app-wrapper-footer">
