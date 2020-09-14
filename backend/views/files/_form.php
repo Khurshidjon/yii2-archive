@@ -24,7 +24,8 @@ use yii\widgets\ActiveForm;
         <div class="container-fluid">
             <?= $this->render('dynamic-form', [
                 'form' => $form,
-                'modelsOptionValue' => $modelsOptionValue
+                'modelsOptionValue' => $modelsOptionValue,
+                'folder_id' => $folder_id
             ]) ?>
         </div>
 

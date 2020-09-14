@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = 'Update';
                             if ($modelFile) {
                                 $pathFile =  'http://front.archive.loc' .$modelFile->file_path.'/'.$modelFile->file_name;
                                 if (in_array($modelFile->file_extension, array("jpg", "png", "jpeg", "JPG", "PNG", "JPEG"))){
-                                    $initialPreview[] = Html::img($pathFile, ['class' => 'w-100']);
+                                    $initialPreview[] = Html::img($pathFile, ['style' => 'width: 200px; 120px']);
                                 }elseif (in_array($modelFile->file_extension, array("mp4", "mov", "avi"))){
                                     $initialPreview[] = '<video src="'. $pathFile .'" class="w-100" controls height="160"></video>';
                                 }elseif ($modelFile->file_extension == 'pdf'){
@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = 'Update';
                                 }
                             }
                             ?>
-                            <?= $form->field($modelOptionValue, "file_name")->label(false)->widget(FileInput::classname(), [
+                            <?= $form->field($modelOptionValue, "fileInput")->label(false)->widget(FileInput::classname(), [
                                 'options' => [
                                     'multiple' => false,
 //                                        'accept' => 'image/*',
@@ -113,7 +113,7 @@ $this->params['breadcrumbs'][] = 'Update';
                                     'removeLabel' => ' Удалить',
                                     'removeIcon' => '<i class="fas fa-trash"></i>',
                                     'previewSettings' => [
-                                        'image' => ['width' => '208px', 'height' => 'auto'],
+//                                        'image' => ['width' => '208px', 'height' => 'auto'],
 //                                        'video' => ['width' => '248px', 'height' => 'auto'],
                                     ],
                                     'previewFileIconSettings' => [

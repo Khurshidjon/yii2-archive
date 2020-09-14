@@ -12,5 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="files-create">
     <?= $this->render('_form', [
         'modelsOptionValue' => $modelsOptionValue,
+        'folder_id' => $folder_id
     ]) ?>
 </div>

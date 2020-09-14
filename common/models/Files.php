@@ -3,12 +3,14 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "files".
  *
  * @property int $id
+ * @property string|null $fileInput
  * @property int|null $folder_id
  * @property int|null $category_id
  * @property int|null $type_id
@@ -34,6 +36,16 @@ use yii\web\UploadedFile;
  */
 class Files extends \yii\db\ActiveRecord
 {
+
+    public $fileInput;
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -50,8 +62,9 @@ class Files extends \yii\db\ActiveRecord
         return [
             [['folder_id', 'category_id', 'document_date', 'view_count', 'download_count', 'file_page_count'], 'integer'],
             [['document_description'], 'string'],
+            [['title'], 'required'],
             [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
-            [['file_name'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
+            [['fileInput'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['folder_id'], 'exist', 'skipOnError' => true, 'targetClass' => Folders::className(), 'targetAttribute' => ['folder_id' => 'id']],
         ];

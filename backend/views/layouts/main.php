@@ -435,14 +435,14 @@ AppAssetBackendArchive::register($this);
                         <ul class="vertical-nav-menu">
                             <li class="app-sidebar__heading">Панель приборов</li>
                             <li>
-                                <a href="<?= \yii\helpers\Url::toRoute('/')?>" class="mm-active">
+                                <a href="<?= \yii\helpers\Url::toRoute('/')?>" class="">
                                     <i class="metismenu-icon pe-7s-rocket"></i>
                                     Главная
                                 </a>
                             </li>
                             <li class="app-sidebar__heading">Меню</li>
                             <li class="mm-active">
-                                <a href="#">
+                                <a href="#" class="mm-active">
                                     <i class="metismenu-icon pe-7s-keypad"></i>
                                     Книги
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
@@ -473,6 +473,12 @@ AppAssetBackendArchive::register($this);
                                         </a>
                                     </li>
                                 </ul>
+                            </li>
+                            <li>
+                                <a href="<?= \yii\helpers\Url::toRoute('/folders')?>" class="">
+                                    <i class="metismenu-icon pe-7s-rocket"></i>
+                                    Файл
+                                </a>
                             </li>
                     <!--        <li>
                                 <a href="#">

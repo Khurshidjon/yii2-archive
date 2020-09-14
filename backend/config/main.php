@@ -12,6 +12,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
+    'timeZone' => 'Asia/Tashkent',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',

@@ -6,6 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\FilesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $folder_id \common\models\Folders */
 
 $this->title = 'Files';
 $this->params['breadcrumbs'][] = $this->title;
@@ -15,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Files', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Files', ['create?folder_id='.$folder_id], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,22 +27,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'folder_id',
-            'category_id',
-            'type_id',
+//            'id',
             'title',
+//            'folder_id',
+            'category_id',
+//            'type_id',
             //'file_cover',
             //'document_number',
             //'document_date',
             //'document_description:ntext',
             //'document_author',
-            //'file_name',
-            //'file_size',
+            'file_name',
+            'file_size',
             //'file_extension',
             //'file_path',
-            //'created_at',
-            //'updated_at',
+            'created_at',
+            'updated_at',
 
 
             [

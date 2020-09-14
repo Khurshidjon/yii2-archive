@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\search\FilesSearch;
 use Yii;
 use common\models\Folders;
 use backend\models\search\FoldersSearch;
@@ -52,8 +53,12 @@ class FoldersController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+        $searchModel = new FilesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->redirect('/files/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

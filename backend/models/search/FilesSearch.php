@@ -40,7 +40,8 @@ class FilesSearch extends Files
      */
     public function search($params)
     {
-        $query = Files::find();
+        $folder_id = $params['id'];
+        $query = Files::find()->where(['folder_id' => $folder_id]);
 
         // add conditions that should always apply here
 

@@ -37,7 +37,7 @@ class FilesController extends Controller
      * Lists all Files models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id)
     {
         $searchModel = new FilesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -45,6 +45,7 @@ class FilesController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'folder_id' => $id
         ]);
     }
 
@@ -58,6 +59,7 @@ class FilesController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'folder_id' => $id
         ]);
     }
 
@@ -66,7 +68,7 @@ class FilesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($folder_id)
     {
         $modelsOptionValue = [new Files];
         if (Yii::$app->request->post()) {
@@ -78,15 +80,19 @@ class FilesController extends Controller
             }
             Model::loadMultiple($modelsOptionValue, Yii::$app->request->post());
             foreach ($modelsOptionValue as $index => $modelOptionValue) {
-                $file = UploadedFile::getInstance($modelOptionValue, "[{$index}]file_name");
-                $modelOptionValue->upload($file);
-                $modelOptionValue->save(false);
+              $modelOptionValue->folder_id = Yii::$app->request->post('folder_id');
+                $file = UploadedFile::getInstance($modelOptionValue, "[{$index}]fileInput");
+                if ($file != null OR !empty($file)){
+                    $modelOptionValue->upload($file);
+                }
+                $modelOptionValue->save();
             }
-            return $this->redirect(['/files']);
+            return $this->redirect(['/files', 'id' => $folder_id]);
         }
 
         return $this->render('create', [
-            'modelsOptionValue' => (empty($modelsOptionValue)) ? [new Files] : $modelsOptionValue
+            'modelsOptionValue' => (empty($modelsOptionValue)) ? [new Files] : $modelsOptionValue,
+            'folder_id' => $folder_id
         ]);
     }
 
@@ -101,11 +107,13 @@ class FilesController extends Controller
     {
         $modelOptionValue = $this->findModel($id);
         if ($modelOptionValue->load(Yii::$app->request->post())) {
-            $file = UploadedFile::getInstance($modelOptionValue, "file_name");
-            if($modelOptionValue->save(false)){
+            $file = UploadedFile::getInstance($modelOptionValue, "fileInput");
+            if ($file != null OR !empty($file)){
                 $modelOptionValue->upload($file);
             }
-            return $this->redirect(['/files']);
+            $modelOptionValue->save();
+            return $this->redirect(['/files', 'id' => $modelOptionValue->folder_id]);
+
         }
         return $this->render('update', [
             'modelOptionValue' => $modelOptionValue

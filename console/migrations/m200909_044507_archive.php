@@ -21,13 +21,15 @@ class m200909_044507_archive extends Migration
 ENGINE = InnoDB");
 
         $this->execute("CREATE TABLE IF NOT EXISTS {{%folders}} (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(255) NULL,
-  `type` INT NULL DEFAULT 1 COMMENT '1-open folder, 2-secret folder',
-  `status` INT NULL DEFAULT 1 COMMENT '1-active, 2-inactive, 3-deleted',
-  `parent_id` INT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB");
+            `id` INT NOT NULL AUTO_INCREMENT,
+            `title` VARCHAR(255) NULL,
+            `type` INT NULL DEFAULT 1 COMMENT '1-open folder, 2-secret folder',
+            `status` INT NULL DEFAULT 1 COMMENT '1-active, 2-inactive, 3-deleted',
+            `parent_id` INT NULL,
+            `created_at` INT NULL,
+            `updated_at` INT NULL,
+                PRIMARY KEY (`id`))
+            ENGINE = InnoDB");
 
 
         $this->execute("CREATE TABLE IF NOT EXISTS {{%files}} (

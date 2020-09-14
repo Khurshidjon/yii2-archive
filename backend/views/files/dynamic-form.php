@@ -42,6 +42,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                 </tr>
             </thead>
             <tbody class="form-options-body">
+            <input type="hidden" name="folder_id" value="<?= $folder_id?>">
             <?php foreach ($modelsOptionValue as $index => $modelOptionValue): ?>
                 <tr class="form-options-item">
                     <td class="sortable-handle text-center vcenter" style="cursor: move;">
@@ -54,9 +55,6 @@ use wbraganca\dynamicform\DynamicFormWidget;
                             </div>
                             <div class="col-md-3">
                                 <?= $form->field($modelOptionValue, "[{$index}]file_page_count")->textInput(['maxlength' => 128]); ?>
-                            </div>
-                            <div class="col-md-6">
-                                <?= $form->field($modelOptionValue, "[{$index}]folder_id")->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Folders::find()->all(), 'id', 'title'), ['prompt' => 'Пожалуйста выберите']) ?>
                             </div>
                             <div class="col-md-6">
                                 <?= $form->field($modelOptionValue, "[{$index}]category_id")->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Categories::find()->where(['not', ['parent_id' => null]])->all(), 'id', 'title'), ['prompt' => 'Пожалуйста выберите']) ?>
@@ -106,7 +104,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                     }
                                 }
                                 ?>
-                                <?= $form->field($modelOptionValue, "[{$index}]file_name")->label(false)->widget(FileInput::classname(), [
+                                <?= $form->field($modelOptionValue, "[{$index}]fileInput")->label(false)->widget(FileInput::classname(), [
                                     'options' => [
                                         'multiple' => false,
 //                                        'accept' => 'image/*',

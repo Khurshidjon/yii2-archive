@@ -11,6 +11,8 @@ use common\models\Folders;
  */
 class FoldersSearch extends Folders
 {
+    public $size;
+    public $count;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +20,7 @@ class FoldersSearch extends Folders
     {
         return [
             [['id', 'type', 'status', 'parent_id'], 'integer'],
-            [['title'], 'safe'],
+            [['title', 'size', 'count'], 'safe'],
         ];
     }
 
@@ -40,7 +42,7 @@ class FoldersSearch extends Folders
      */
     public function search($params)
     {
-        $query = Folders::find();
+        $query = Folders::find()->joinWith('files');
 
         // add conditions that should always apply here
 
@@ -60,6 +62,8 @@ class FoldersSearch extends Folders
         $query->andFilterWhere([
             'id' => $this->id,
             'type' => $this->type,
+            'size' => $this->size,
+            'count' => $this->count,
             'status' => $this->status,
             'parent_id' => $this->parent_id,
         ]);
