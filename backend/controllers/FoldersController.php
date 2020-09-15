@@ -35,7 +35,7 @@ class FoldersController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['index', 'create', 'delete'],
+                        'actions' => ['index', 'create', 'update', 'view', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
