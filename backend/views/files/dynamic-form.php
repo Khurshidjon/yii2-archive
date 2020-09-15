@@ -67,7 +67,6 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                 <?= $form->field($modelOptionValue, "[{$index}]document_number")->textInput(['maxlength' => true]) ?>
                             </div>
                             <div class="col-md-4">
-<!--                                --><?//= $form->field($modelOptionValue, "[{$index}]document_date")->textInput()?>
                                 <?= $form->field($modelOptionValue, "[{$index}]document_date")->widget(\kartik\date\DatePicker::className(), [
                                         'options' => [
                                             'autocomplete'=>'off',
