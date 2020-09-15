@@ -43,6 +43,7 @@ class Folders extends \yii\db\ActiveRecord
     {
         return [
             [['type', 'status', 'parent_id'], 'integer'],
+            [['title'], 'required'],
             [['title'], 'string', 'max' => 255],
             [['count', 'size'], 'safe'],
         ];

@@ -17,9 +17,9 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php $form = ActiveForm::begin([
-        'enableClientValidation' => true,
+        'enableClientValidation' => false,
         'enableAjaxValidation' => false,
-        'validateOnChange' => true,
+        'validateOnChange' => false,
         'validateOnBlur' => false,
         'options' => [
             'enctype' => 'multipart/form-data',
@@ -42,17 +42,15 @@ $this->params['breadcrumbs'][] = 'Update';
                 </td>
                 <td class="vcenter">
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <?= $form->field($modelOptionValue, "title")->textInput(['maxlength' => 128]); ?>
+                        </div>
+                        <div class="col-md-9">
+                            <?= $form->field($modelOptionValue, "category_id")->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Categories::find()->where(['not', ['parent_id' => null]])->all(), 'id', 'title'), ['prompt' => 'Пожалуйста выберите']) ?>
+                            <?= $form->field($modelOptionValue, "folder_id")->hiddenInput(['value' => $modelOptionValue->folder_id])->label(false) ?>
                         </div>
                         <div class="col-md-3">
                             <?= $form->field($modelOptionValue, "file_page_count")->textInput(['maxlength' => 128]); ?>
-                        </div>
-                        <div class="col-md-6">
-                            <?= $form->field($modelOptionValue, "folder_id")->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Folders::find()->all(), 'id', 'title'), ['prompt' => 'Пожалуйста выберите']) ?>
-                        </div>
-                        <div class="col-md-6">
-                            <?= $form->field($modelOptionValue, "category_id")->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Categories::find()->where(['not', ['parent_id' => null]])->all(), 'id', 'title'), ['prompt' => 'Пожалуйста выберите']) ?>
                         </div>
                     </div>
                 </td>
@@ -62,7 +60,16 @@ $this->params['breadcrumbs'][] = 'Update';
                             <?= $form->field($modelOptionValue, "document_number")->textInput(['maxlength' => true]) ?>
                         </div>
                         <div class="col-md-4">
-                            <?= $form->field($modelOptionValue, "document_date")->textInput(['maxlength' => true]) ?>
+                            <?= $form->field($modelOptionValue, "document_date")->widget(\kartik\date\DatePicker::className(), [
+                                'options' => [
+                                    'autocomplete'=>'off',
+                                    'readOnly' => true,
+                                    'style' => 'background:white'
+                                ],
+                                'pluginOptions' => [
+                                    'autoClose' => true
+                                ]
+                            ]) ?>
                         </div>
                         <div class="col-md-4">
                             <?= $form->field($modelOptionValue, "document_author")->textInput(['maxlength' => true]) ?>

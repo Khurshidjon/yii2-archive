@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => 'Actions',
                 'buttons' => [
                     'view' => function($url, $model){
-                        return Html::a('<i class="metismenu-icon pe-7s-look"></i>', ['show', 'id' => $model->id], [
+                        return Html::a('<i class="metismenu-icon pe-7s-look"></i>', ['view', 'id' => $model->id], [
                             'style' => 'font-size: 20px',
                         ]);
                     },

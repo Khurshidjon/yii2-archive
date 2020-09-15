@@ -11,6 +11,7 @@ use Yii;
  * @property string|null $title
  * @property int|null $parent_id
  * @property int|null $status
+ * @property int|null $is_parent
  *
  * @property Files[] $files
  */
@@ -30,7 +31,7 @@ class Categories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'status'], 'integer'],
+            [['parent_id', 'status', 'is_parent'], 'integer'],
             [['title'], 'string', 'max' => 255],
         ];
     }
@@ -44,6 +45,7 @@ class Categories extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'parent_id' => 'Parent ID',
+            'is_parent' => 'Is parent',
             'status' => 'Status',
         ];
     }

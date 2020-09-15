@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Files;
 use backend\models\search\FilesSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -28,6 +29,20 @@ class FilesController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['login', 'error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['index', 'create', 'update', 'view', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
@@ -80,7 +95,8 @@ class FilesController extends Controller
             }
             Model::loadMultiple($modelsOptionValue, Yii::$app->request->post());
             foreach ($modelsOptionValue as $index => $modelOptionValue) {
-              $modelOptionValue->folder_id = Yii::$app->request->post('folder_id');
+                $modelOptionValue->document_date = strtotime($modelOptionValue->document_date);
+                $modelOptionValue->folder_id = Yii::$app->request->post('folder_id');
                 $file = UploadedFile::getInstance($modelOptionValue, "[{$index}]fileInput");
                 if ($file != null OR !empty($file)){
                     $modelOptionValue->upload($file);
@@ -131,12 +147,18 @@ class FilesController extends Controller
     {
         $model = $this->findModel($id);
         $name = $model->title;
-
+        $folder_id = $model->folder_id;
+        $file = Yii::getAlias('@frontend/web') . $model->file_path . '/' . $model->file_name;
         if ($model->delete()) {
+            if ($file){
+                unlink(Yii::getAlias('@frontend/web') . $model->file_path . '/' . $model->file_name);
+            }else{
+                throw new NotFoundHttpException('Ushbu fayl serverga yuklanmagan');
+            }
             Yii::$app->session->setFlash('success', 'Record  <strong>"' . $name . '"</strong> deleted successfully.');
         }
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'id' => $folder_id]);
     }
 
     /**

@@ -16,6 +16,7 @@ class m200909_044507_archive extends Migration
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(255) NULL,
    `parent_id` INT NULL,
+   `is_parent` INT NULL DEFAULT 0,
   `status` INT NULL DEFAULT 1,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB");

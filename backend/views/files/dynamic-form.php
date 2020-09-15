@@ -50,14 +50,14 @@ use wbraganca\dynamicform\DynamicFormWidget;
                     </td>
                     <td class="vcenter">
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-12">
                                 <?= $form->field($modelOptionValue, "[{$index}]title")->textInput(['maxlength' => 128]); ?>
+                            </div>
+                            <div class="col-md-9">
+                                <?= $form->field($modelOptionValue, "[{$index}]category_id")->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Categories::find()->where(['is_parent' => 0])->all(), 'id', 'title'), ['prompt' => 'Пожалуйста выберите']) ?>
                             </div>
                             <div class="col-md-3">
                                 <?= $form->field($modelOptionValue, "[{$index}]file_page_count")->textInput(['maxlength' => 128]); ?>
-                            </div>
-                            <div class="col-md-6">
-                                <?= $form->field($modelOptionValue, "[{$index}]category_id")->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Categories::find()->where(['not', ['parent_id' => null]])->all(), 'id', 'title'), ['prompt' => 'Пожалуйста выберите']) ?>
                             </div>
                         </div>
                     </td>
@@ -67,17 +67,18 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                 <?= $form->field($modelOptionValue, "[{$index}]document_number")->textInput(['maxlength' => true]) ?>
                             </div>
                             <div class="col-md-4">
-                                <?= $form->field($modelOptionValue, "[{$index}]document_date")->textInput()?>
-                                <?php /*$form->field($modelOptionValue, "[{$index}]document_date")->widget(\kartik\date\DatePicker::className(), [
+<!--                                --><?//= $form->field($modelOptionValue, "[{$index}]document_date")->textInput()?>
+                                <?= $form->field($modelOptionValue, "[{$index}]document_date")->widget(\kartik\date\DatePicker::className(), [
                                         'options' => [
                                             'autocomplete'=>'off',
-                                            'readOnly'=>true,
-                                            'style' => 'background:white'
+                                            'readOnly' => true,
+                                            'style' => 'background:white',
+                                            'class'=>'form-control document_date'
                                         ],
                                         'pluginOptions' => [
-                                                'autocomplete' => false
+                                            'autoClose' => true
                                         ]
-                                ]) */?>
+                                ]) ?>
                             </div>
                             <div class="col-md-4">
                                 <?= $form->field($modelOptionValue, "[{$index}]document_author")->textInput(['maxlength' => true]) ?>
@@ -163,36 +164,3 @@ use wbraganca\dynamicform\DynamicFormWidget;
     </table>
         <?php DynamicFormWidget::end(); ?>
     </div>
-
-<?php
-$this->registerJs(' 
-$(".optionvalue-img").on("filecleared", function(event) {
-    var regexID = /^(.+?)([-\d-]{1,})(.+)$/i;
-    var id = event.target.id;
-    var matches = id.match(regexID);
-    if (matches && matches.length === 4) {
-        var identifiers = matches[2].split("-");
-        $("#optionvalue-" + identifiers[1] + "-deleteimg").val("1");
-    }
-});
-
-var fixHelperSortable = function(e, ui) {
-    ui.children().each(function() {
-        $(this).width($(this).width());
-    });
-    return ui;
-};
-
-$(".form-options-body").sortable({
-    items: "tr",
-    cursor: "move",
-    opacity: 0.6,
-    axis: "y",
-    handle: ".sortable-handle",
-    helper: fixHelperSortable,
-    update: function(ev){
-        $(".dynamicform_wrapper").yiiDynamicForm("updateContainer");
-    }
-}).disableSelection();
-');
-?>
