@@ -41,8 +41,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'file_size',
             //'file_extension',
             //'file_path',
-            'created_at',
-            'updated_at',
+            [
+                'attribute' => 'created_at',
+                'value' => function($model){
+                    return date("Y-m-d H:i:s", $model->created_at);
+                }
+            ],
+            [
+                'attribute' => 'updated_at',
+                'value' => function($model){
+                    return date("Y-m-d H:i:s", $model->updated_at);
+                }
+            ],
 
 
             [
