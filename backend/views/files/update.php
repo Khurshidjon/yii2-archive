@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php $form = ActiveForm::begin([
-        'enableClientValidation' => false,
+        'enableClientValidation' => true,
         'enableAjaxValidation' => false,
         'validateOnChange' => false,
         'validateOnBlur' => false,
@@ -30,9 +30,9 @@ $this->params['breadcrumbs'][] = 'Update';
         <thead>
         <tr>
             <th></th>
-            <th>File information</th>
-            <th>Document information</th>
-            <th>File</th>
+            <th>Умумий маълумотлар</th>
+            <th>Файл маълумотлари</th>
+            <th>Файл</th>
         </tr>
         </thead>
         <tbody class="form-options-body">
@@ -60,6 +60,9 @@ $this->params['breadcrumbs'][] = 'Update';
                             <?= $form->field($modelOptionValue, "document_number")->textInput(['maxlength' => true]) ?>
                         </div>
                         <div class="col-md-4">
+                            <?php
+                                $modelOptionValue->document_date = date("d-m-Y", $modelOptionValue->document_date);
+                            ?>
                             <?= $form->field($modelOptionValue, "document_date")->widget(\kartik\date\DatePicker::className(), [
                                 'options' => [
                                     'autocomplete'=>'off',
@@ -67,7 +70,8 @@ $this->params['breadcrumbs'][] = 'Update';
                                     'style' => 'background:white'
                                 ],
                                 'pluginOptions' => [
-                                    'autoClose' => true
+                                    'autoclose'=>true,
+                                    'format' => 'dd-mm-yyyy'
                                 ]
                             ]) ?>
                         </div>

@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="files-form">
 
     <?php $form = ActiveForm::begin([
-        'enableClientValidation' => false,
+        'enableClientValidation' => true,
         'enableAjaxValidation' => false,
         'validateOnChange' => false,
         'validateOnBlur' => false,

@@ -84,7 +84,8 @@ AppAssetBackendArchive::register($this);
                                 Settings
                             </a>
                         </li>
-                    </ul>        </div>
+                    </ul>
+                </div>
                 <div class="app-header-right">
                     <div class="header-btn-lg pr-0">
                         <div class="widget-content p-0">
@@ -107,20 +108,21 @@ AppAssetBackendArchive::register($this);
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                        Alina Mclourd
+                                        Xurshid
                                     </div>
                                     <div class="widget-subheading">
-                                        VP People Manager
+                                        Admin
                                     </div>
                                 </div>
-                                <div class="widget-content-right header-user-info ml-3">
-                                    <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
-                                        <i class="fa text-white fa-calendar pr-1 pl-1"></i>
-                                    </button>
-                                </div>
+<!--                                <div class="widget-content-right header-user-info ml-3">-->
+<!--                                    <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">-->
+<!--                                        <i class="fa text-white fa-calendar pr-1 pl-1"></i>-->
+<!--                                    </button>-->
+<!--                                </div>-->
                             </div>
                         </div>
-                    </div>        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="app-main">
@@ -130,9 +132,9 @@ AppAssetBackendArchive::register($this);
                     <div class="header__pane ml-auto">
                         <div>
                             <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
-                                    <span class="hamburger-box">
-                                        <span class="hamburger-inner"></span>
-                                    </span>
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
                             </button>
                         </div>
                     </div>
@@ -165,7 +167,7 @@ AppAssetBackendArchive::register($this);
                                 </a>
                             </li>
                             <li class="app-sidebar__heading">Меню</li>
-                            <li class="<?=Url::hasActive(['languages'])?'mm-active':''?> <?=Url::hasActive(['categories'])?'mm-active':''?>">
+                            <li class="<?=Url::hasActive(['languages'])?'mm-active':''?> <?=Url::hasActive(['categories'])?'active':''?>">
                                 <a href="#" class="<?=Url::hasActive(['languages'])?'mm-active':''?> <?=Url::hasActive(['categories'])?'mm-active':''?>">
                                     <i class="metismenu-icon pe-7s-keypad"></i>
                                     Книги
@@ -185,7 +187,7 @@ AppAssetBackendArchive::register($this);
                                 </ul>
                             </li>
                             <li>
-                                <a href="<?= \yii\helpers\Url::toRoute('/folders')?>" class="<?=Url::hasActive(['folders'])?'mm-active':''?> <?=Url::hasActive(['files'])?'mm-active':''?>">
+                                <a href="<?= \yii\helpers\Url::toRoute('/folders')?>" class="<?=Url::hasActive(['folders'])?'active':''?> <?=Url::hasActive(['files'])?'active':''?>">
                                     <i class="metismenu-icon pe-7s-folder"></i>
                                     Файл
                                 </a>

@@ -8,7 +8,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
 
     <div id="panel-option-values" class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><i class="fas fa-file-archive"></i> Option values</h3>
+            <h3 class="panel-title"><i class="fas fa-file-archive"></i> Файл яратиш</h3>
         </div>
         <?php DynamicFormWidget::begin([
             'widgetContainer' => 'dynamicform_wrapper',
@@ -34,56 +34,62 @@ use wbraganca\dynamicform\DynamicFormWidget;
         <table class="table table-bordered table-striped margin-b-none">
             <thead>
                 <tr>
-                    <th></th>
-                    <th>Option value name</th>
-                    <th>Option value name</th>
-                    <th>Image</th>
-                    <th>Actions</th>
+                    <th colspan="2">Файл ҳақида маълумотлар</th>
+                    <th>Файл</th>
+                    <th>Ўчириш</th>
                 </tr>
             </thead>
             <tbody class="form-options-body">
             <input type="hidden" name="folder_id" value="<?= $folder_id?>">
             <?php foreach ($modelsOptionValue as $index => $modelOptionValue): ?>
                 <tr class="form-options-item">
-                    <td class="sortable-handle text-center vcenter" style="cursor: move;">
-                        <i class="far fa-arrows"></i>
-                    </td>
                     <td class="vcenter">
                         <div class="row">
                             <div class="col-md-12">
                                 <?= $form->field($modelOptionValue, "[{$index}]title")->textInput(['maxlength' => 128]); ?>
                             </div>
-                            <div class="col-md-9">
-                                <?= $form->field($modelOptionValue, "[{$index}]category_id")->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Categories::find()->where(['is_parent' => 0])->all(), 'id', 'title'), ['prompt' => 'Пожалуйста выберите']) ?>
+                            <div class="col-md-6">
+                                <?= $form->field($modelOptionValue, "[{$index}]category_id")->dropDownList(
+                                        \yii\helpers\ArrayHelper::map(\common\models\Categories::find()->where(['is_parent' => 0])->all(), 'id', 'title'),
+                                        [
+                                            'prompt' => 'Пожалуйста выберите'
+                                        ]) ?>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <?= $form->field($modelOptionValue, "[{$index}]file_page_count")->textInput(['maxlength' => 128]); ?>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $form->field($modelOptionValue, "[{$index}]document_date")->widget(\kartik\date\DatePicker::className(), [
+                                    'options' => [
+                                        'autocomplete' => 'off',
+                                        'readOnly' => true,
+                                        'style' => 'background:white',
+                                        'class' => 'form-control document_date'
+                                    ],
+                                    'pluginOptions' => [
+                                        'autoclose' => true,
+                                        'format' => 'dd-mm-yyyy'
+                                    ]
+                                ]) ?>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $form->field($modelOptionValue, "[{$index}]document_author")->textInput(['maxlength' => true]) ?>
+                            </div>
+                            <div class="col-md-12">
+                                <?= $form->field($modelOptionValue, "[{$index}]languages")->widget(\kartik\select2\Select2::className(), [
+                                        'data' => \yii\helpers\ArrayHelper::map(\common\models\Languages::find()->all(), 'id', 'title'),
+                                        'options' => [
+                                            'multiple' => true,
+                                            'prompt' => 'Пожалуйста выберите'
+                                        ]
+                                ]) ?>
                             </div>
                         </div>
                     </td>
                     <td>
                         <div class="row">
-                            <div class="col-md-4">
-                                <?= $form->field($modelOptionValue, "[{$index}]document_number")->textInput(['maxlength' => true]) ?>
-                            </div>
-                            <div class="col-md-4">
-                                <?= $form->field($modelOptionValue, "[{$index}]document_date")->widget(\kartik\date\DatePicker::className(), [
-                                        'options' => [
-                                            'autocomplete'=>'off',
-                                            'readOnly' => true,
-                                            'style' => 'background:white',
-                                            'class'=>'form-control document_date'
-                                        ],
-                                        'pluginOptions' => [
-                                            'autoClose' => true
-                                        ]
-                                ]) ?>
-                            </div>
-                            <div class="col-md-4">
-                                <?= $form->field($modelOptionValue, "[{$index}]document_author")->textInput(['maxlength' => true]) ?>
-                            </div>
                             <div class="col-md-12">
-                                <?= $form->field($modelOptionValue, "[{$index}]document_description")->textarea(['rows' => 4]) ?>
+                                <?= $form->field($modelOptionValue, "[{$index}]document_description")->textarea(['rows' => 11, 'cols' => 150]) ?>
                             </div>
                         </div>
                     </td>
@@ -124,7 +130,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                         'removeLabel' => ' Удалить',
                                         'removeIcon' => '<i class="fas fa-trash"></i>',
                                         'previewSettings' => [
-//                                    'image' => ['width' => '138px', 'height' => 'auto']
+                                            //'image' => ['width' => '138px', 'height' => 'auto']
                                         ],
                                         'previewFileIconSettings' => [
                                             'doc' => '<i class="fas fa-file-word text-primary"></i>',
@@ -156,7 +162,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4"></td>
+                    <td colspan="3"></td>
                     <td><button type="button" class="add-item btn btn-info btn-sm"><span class="fas fa-plus"></span> Новый</button></td>
                 </tr>
             </tfoot>

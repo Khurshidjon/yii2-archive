@@ -38,6 +38,7 @@ class Files extends \yii\db\ActiveRecord
 {
 
     public $fileInput;
+    public $languages;
 
     public function behaviors()
     {
@@ -60,9 +61,9 @@ class Files extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['folder_id', 'category_id', 'document_date', 'view_count', 'download_count', 'file_page_count'], 'integer'],
+            [['folder_id', 'category_id', 'view_count', 'download_count', 'file_page_count'], 'integer'],
             [['document_description'], 'string'],
-            [['title'], 'required'],
+            [['title', 'category_id'], 'required'],
             [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
             [['fileInput'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
@@ -77,21 +78,23 @@ class Files extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'folder_id' => 'Folder ID',
-            'category_id' => 'Category ID',
-            'type_id' => 'Type ID',
-            'title' => 'Title',
+            'folder_id' => 'Папка номи',
+            'category_id' => 'Категория номи',
+            'file_page_count' => 'Саҳифалар сони',
+            'type_id' => 'Тип',
+            'title' => 'Номланиши',
             'file_cover' => 'File Cover',
-            'document_number' => 'Document Number',
-            'document_date' => 'Document Date',
-            'document_description' => 'Document Description',
-            'document_author' => 'Document Author',
+            'document_number' => 'Ҳужжат рақами',
+            'document_date' => 'Нашр этилган сана',
+            'document_description' => 'Фафл тавсифи',
+            'document_author' => 'Муаллиф',
             'file_name' => 'File Name',
-            'file_size' => 'File Size',
+            'file_size' => 'Файл хажми',
             'file_extension' => 'File Extension',
             'file_path' => 'File Path',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'languages' => 'Тили',
+            'created_at' => 'Яратилган вақти',
+            'updated_at' => 'Ўзгартирилган вақти',
         ];
     }
 

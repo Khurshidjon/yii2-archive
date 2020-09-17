@@ -43,6 +43,13 @@ return [
             'rules' => [
             ],
         ],
+//        'assetManager' => [
+//            'bundles' => [
+//                'yii\web\JqueryAsset' => [
+////                    'js'=>[]
+//                ],
+//            ],
+//        ],
     ],
     'params' => $params,
 ];

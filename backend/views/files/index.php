@@ -8,7 +8,7 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $folder_id \common\models\Folders */
 
-$this->title = 'Files';
+$this->title = 'Файллар';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="files-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Files', ['create?folder_id='.$folder_id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Файл қўшиш', ['create?folder_id='.$folder_id], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,15 +30,25 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'id',
             'title',
 //            'folder_id',
-            'category_id',
+            [
+                'attribute' => 'category_id',
+                'value' => function($model){
+                    return $model->category->title;
+                }
+            ],
 //            'type_id',
             //'file_cover',
             //'document_number',
             //'document_date',
             //'document_description:ntext',
             //'document_author',
-            'file_name',
-            'file_size',
+//            'file_name',
+            [
+                'attribute' => 'file_size',
+                'value' => function($model){
+                    return floor($model->file_size / 1024) . ' КБ';
+                }
+            ],
             //'file_extension',
             //'file_path',
             [
@@ -58,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {delete}',
-                'header' => 'Actions',
+                'header' => 'Жараёнлар',
                 'buttons' => [
                     'view' => function($url, $model){
                         return Html::a('<i class="metismenu-icon pe-7s-look"></i>', ['view', 'id' => $model->id], [
