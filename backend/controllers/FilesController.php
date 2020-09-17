@@ -92,28 +92,18 @@ class FilesController extends Controller
         $modelsOptionValue = [new Files];
         if (Yii::$app->request->post()) {
             $modelsOptionValue = \backend\models\Model::createMultiple(Files::className());
-
-            if (Yii::$app->request->isAjax) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return ActiveForm::validateMultiple($modelsOptionValue);
-            }
             Model::loadMultiple($modelsOptionValue, Yii::$app->request->post());
+
             foreach ($modelsOptionValue as $index => $modelOptionValue) {
-                $modelOptionValue->document_date = strtotime($modelOptionValue->document_date);
                 $modelOptionValue->folder_id = Yii::$app->request->post('folder_id');
+                $modelOptionValue->document_date = strtotime($modelOptionValue->document_date);
                 $file = UploadedFile::getInstance($modelOptionValue, "[{$index}]fileInput");
+                $modelOptionValue->save();
                 if ($file != null OR !empty($file)) {
                     $modelOptionValue->upload($file);
                 }
-                $modelOptionValue->save();
-//                foreach ($modelOptionValue->languages as $language) {
-//                    $fl = new FileLanguage();
-//                    $fl->file_id = $modelOptionValue->id;
-//                    $fl->language_id = $language;
-//                    $fl->save(false);
-//                }
-                return $this->redirect(['/files', 'id' => $folder_id]);
             }
+            return $this->redirect(['/files', 'id' => $folder_id]);
         }
         return $this->render('create', [
             'modelsOptionValue' => (empty($modelsOptionValue)) ? [new Files] : $modelsOptionValue,
@@ -138,14 +128,6 @@ class FilesController extends Controller
                 $modelOptionValue->upload($file);
             }
             $modelOptionValue->save();
-//            if ($modelOptionValue->languages){
-//                foreach ($modelOptionValue->languages as $language) {
-//                    $fl = new FileLanguage();
-//                    $fl->file_id = $modelOptionValue->id;
-//                    $fl->language_id = $language;
-//                    $fl->save(false);
-//                }
-//            }
             return $this->redirect(['/files', 'id' => $modelOptionValue->folder_id]);
 
         }
