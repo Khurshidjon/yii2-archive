@@ -42,7 +42,48 @@ class FoldersSearch extends Folders
      */
     public function search($params)
     {
-        $query = Folders::find()->joinWith('files');
+        $query = Folders::find()->where(['parent_id' => null])->joinWith('files');
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'type' => $this->type,
+            'size' => $this->size,
+            'count' => $this->count,
+            'status' => $this->status,
+            'parent_id' => $this->parent_id,
+        ]);
+
+        $query->andFilterWhere(['like', 'title', $this->title]);
+
+        return $dataProvider;
+    }
+
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function searchParentFolder($params)
+    {
+        $folder_id = $params['id'];
+        $query = Folders::find()->where(['parent_id' => $folder_id])->joinWith('files');
 
         // add conditions that should always apply here
 

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Files;
 use Yii;
 use common\models\Folders;
 use backend\models\search\FoldersSearch;
@@ -35,7 +36,7 @@ class FoldersController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['index', 'create', 'update', 'view', 'delete'],
+                        'actions' => ['index', 'create', 'update', 'child-create', 'view', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -82,11 +83,29 @@ class FoldersController extends Controller
         $model = new Folders();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
             'model' => $model,
+        ]);
+    }
+    /**
+     * Creates a new Folders model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionChildCreate($folder_id)
+    {
+        $model = new Folders();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['//files/index', 'id' => $model->parent_id]);
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+            'folder_id' => $folder_id
         ]);
     }
 
@@ -119,9 +138,33 @@ class FoldersController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if ($this->findModel($id)->parent_id == null){
+            $this->actionDeleteByIds($id);
+            $this->findModel($id)->delete();
+        }else{
+            Files::deleteByID($id);
+            $this->findModel($id)->delete();
+        }
+
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Deletes an existing Folders model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDeleteByIds($ids)
+    {
+        $model = Folders::find()->where(['parent_id' => $ids])->all();
+        foreach ($model as $value){
+            Files::deleteByID($ids);
+            Files::deleteByID($value->id);
+            $value->delete();
+        }
     }
 
     /**

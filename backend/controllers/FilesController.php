@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use backend\models\search\FoldersSearch;
+use common\models\FileLanguage;
 use Yii;
 use common\models\Files;
 use backend\models\search\FilesSearch;
@@ -55,12 +57,14 @@ class FilesController extends Controller
     public function actionIndex($id)
     {
         $searchModel = new FilesSearch();
+        $searchFolder = new FoldersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataFolders = $searchFolder->searchParentFolder(Yii::$app->request->queryParams);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'folder_id' => $id
+            'folder_id' => $id,
+            'dataFolders' => $dataFolders
         ]);
     }
 
@@ -98,14 +102,19 @@ class FilesController extends Controller
                 $modelOptionValue->document_date = strtotime($modelOptionValue->document_date);
                 $modelOptionValue->folder_id = Yii::$app->request->post('folder_id');
                 $file = UploadedFile::getInstance($modelOptionValue, "[{$index}]fileInput");
-                if ($file != null OR !empty($file)){
+                if ($file != null OR !empty($file)) {
                     $modelOptionValue->upload($file);
                 }
                 $modelOptionValue->save();
+//                foreach ($modelOptionValue->languages as $language) {
+//                    $fl = new FileLanguage();
+//                    $fl->file_id = $modelOptionValue->id;
+//                    $fl->language_id = $language;
+//                    $fl->save(false);
+//                }
+                return $this->redirect(['/files', 'id' => $folder_id]);
             }
-            return $this->redirect(['/files', 'id' => $folder_id]);
         }
-
         return $this->render('create', [
             'modelsOptionValue' => (empty($modelsOptionValue)) ? [new Files] : $modelsOptionValue,
             'folder_id' => $folder_id
@@ -123,11 +132,20 @@ class FilesController extends Controller
     {
         $modelOptionValue = $this->findModel($id);
         if ($modelOptionValue->load(Yii::$app->request->post())) {
+            $modelOptionValue->document_date = strtotime($modelOptionValue->document_date);
             $file = UploadedFile::getInstance($modelOptionValue, "fileInput");
             if ($file != null OR !empty($file)){
                 $modelOptionValue->upload($file);
             }
             $modelOptionValue->save();
+//            if ($modelOptionValue->languages){
+//                foreach ($modelOptionValue->languages as $language) {
+//                    $fl = new FileLanguage();
+//                    $fl->file_id = $modelOptionValue->id;
+//                    $fl->language_id = $language;
+//                    $fl->save(false);
+//                }
+//            }
             return $this->redirect(['/files', 'id' => $modelOptionValue->folder_id]);
 
         }

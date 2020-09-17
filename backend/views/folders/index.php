@@ -68,33 +68,33 @@ $this->params['breadcrumbs'][] = $this->title;
                     return date("Y-m-d H:i:s", $model->updated_at);
                 }
             ],
-//            [
-//                'class' => 'yii\grid\ActionColumn',
-//                'template' => '{view} {update} {delete}',
-//                'header' => 'Actions',
-//                'buttons' => [
-//                    'view' => function($url, $model){
-//                        return Html::a('<i class="metismenu-icon pe-7s-look"></i>', ['view', 'id' => $model->id], [
-//                            'style' => 'font-size: 20px',
-//                        ]);
-//                    },
-//                    'update' => function($url, $model){
-//                        return Html::a('<i class="metismenu-icon pe-7s-eyedropper"></i>', ['update', 'id' => $model->id], [
-//                            'class' => 'mx-2',
-//                            'style' => 'font-size: 20px',
-//                        ]);
-//                    },
-//                    'delete' => function($url, $model){
-//                        return Html::a('<i class="metismenu-icon pe-7s-trash"></i>', ['delete', 'id' => $model->id], [
-//                            'style' => 'font-size: 20px',
-//                            'data' => [
-//                                'confirm' => 'Ushbu papkani rostan ham o\'chirmoqchimisiz?',
-//                                'method' => 'post',
-//                            ],
-//                        ]);
-//                    },
-//                ]
-//            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete}',
+                'header' => 'Actions',
+                'buttons' => [
+                    'view' => function($url, $model){
+                        return Html::a('<i class="metismenu-icon pe-7s-look"></i>', ['view', 'id' => $model->id], [
+                            'style' => 'font-size: 20px',
+                        ]);
+                    },
+                    'update' => function($url, $model){
+                        return Html::a('<i class="metismenu-icon pe-7s-eyedropper"></i>', ['update', 'id' => $model->id], [
+                            'class' => 'mx-2',
+                            'style' => 'font-size: 20px',
+                        ]);
+                    },
+                    'delete' => function($url, $model){
+                        return Html::a('<i class="metismenu-icon pe-7s-trash"></i>', ['delete', 'id' => $model->id], [
+                            'style' => 'font-size: 20px',
+                            'data' => [
+                                'confirm' => 'Ushbu papkani rostan ham o\'chirmoqchimisiz?',
+                                'method' => 'post',
+                            ],
+                        ]);
+                    },
+                ]
+            ],
         ],
     ]);
 

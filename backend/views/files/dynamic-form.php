@@ -34,8 +34,8 @@ use wbraganca\dynamicform\DynamicFormWidget;
         <table class="table table-bordered table-striped margin-b-none">
             <thead>
                 <tr>
-                    <th colspan="2">Файл ҳақида маълумотлар</th>
-                    <th>Файл</th>
+                    <th>Файл ҳақида маълумотлар</th>
+                    <th style="width: 30%">Файл</th>
                     <th>Ўчириш</th>
                 </tr>
             </thead>
@@ -75,21 +75,19 @@ use wbraganca\dynamicform\DynamicFormWidget;
                             <div class="col-md-6">
                                 <?= $form->field($modelOptionValue, "[{$index}]document_author")->textInput(['maxlength' => true]) ?>
                             </div>
-                            <div class="col-md-12">
-                                <?= $form->field($modelOptionValue, "[{$index}]languages")->widget(\kartik\select2\Select2::className(), [
-                                        'data' => \yii\helpers\ArrayHelper::map(\common\models\Languages::find()->all(), 'id', 'title'),
-                                        'options' => [
-                                            'multiple' => true,
-                                            'prompt' => 'Пожалуйста выберите'
-                                        ]
-                                ]) ?>
-                            </div>
                         </div>
-                    </td>
-                    <td>
                         <div class="row">
                             <div class="col-md-12">
-                                <?= $form->field($modelOptionValue, "[{$index}]document_description")->textarea(['rows' => 11, 'cols' => 150]) ?>
+<!--                                --><?php //$form->field($modelOptionValue, "[{$index}]languages[]")->widget(\kartik\select2\Select2::className(), [
+//                                    'data' => \yii\helpers\ArrayHelper::map(\common\models\Languages::find()->all(), 'id', 'title'),
+//                                    'options' => [
+//                                        'multiple' => true,
+//                                        'prompt' => 'Пожалуйста выберите'
+//                                    ]
+//                                ]) ?>
+                            </div>
+                            <div class="col-md-12">
+                                <?= $form->field($modelOptionValue, "[{$index}]document_description")->textarea(['rows' => 4, 'cols' => 40]) ?>
                             </div>
                         </div>
                     </td>
@@ -110,7 +108,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                     }
                                 }
                                 ?>
-                                <?= $form->field($modelOptionValue, "[{$index}]fileInput")->label(false)->widget(FileInput::classname(), [
+                                <?= $form->field($modelOptionValue, "[{$index}]fileInput")->widget(FileInput::classname(), [
                                     'options' => [
                                         'multiple' => false,
 //                                        'accept' => 'image/*',

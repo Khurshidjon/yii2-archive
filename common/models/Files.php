@@ -60,15 +60,29 @@ class Files extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['folder_id', 'category_id', 'view_count', 'download_count', 'file_page_count'], 'integer'],
-            [['document_description'], 'string'],
-            [['title', 'category_id'], 'required'],
-            [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
-            [['fileInput'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
-            [['folder_id'], 'exist', 'skipOnError' => true, 'targetClass' => Folders::className(), 'targetAttribute' => ['folder_id' => 'id']],
-        ];
+        if($this->isNewRecord){
+            return [
+                [['folder_id', 'category_id', 'view_count', 'download_count', 'file_page_count'], 'integer'],
+                [['document_description'], 'string'],
+                [['title', 'fileInput', 'category_id'], 'required'],
+                [['languages', 'document_date'], 'safe'],
+                [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
+                [['fileInput'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
+                [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
+                [['folder_id'], 'exist', 'skipOnError' => true, 'targetClass' => Folders::className(), 'targetAttribute' => ['folder_id' => 'id']],
+            ];
+        }else{
+            return [
+                [['folder_id', 'category_id', 'view_count', 'download_count', 'file_page_count'], 'integer'],
+                [['document_description'], 'string'],
+                [['title', 'category_id'], 'required'],
+                [['languages', 'document_date'], 'safe'],
+                [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
+                [['fileInput'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
+                [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
+                [['folder_id'], 'exist', 'skipOnError' => true, 'targetClass' => Folders::className(), 'targetAttribute' => ['folder_id' => 'id']],
+            ];
+        }
     }
 
     /**
@@ -78,15 +92,15 @@ class Files extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'title' => 'Номланиши',
             'folder_id' => 'Папка номи',
             'category_id' => 'Категория номи',
             'file_page_count' => 'Саҳифалар сони',
             'type_id' => 'Тип',
-            'title' => 'Номланиши',
             'file_cover' => 'File Cover',
             'document_number' => 'Ҳужжат рақами',
             'document_date' => 'Нашр этилган сана',
-            'document_description' => 'Фафл тавсифи',
+            'document_description' => 'Файл тавсифи',
             'document_author' => 'Муаллиф',
             'file_name' => 'File Name',
             'file_size' => 'Файл хажми',
@@ -150,11 +164,12 @@ class Files extends \yii\db\ActiveRecord
         return $this->hasOne(Folders::className(), ['id' => 'folder_id']);
     }
 
-    public static function deleteByIDs($deletedIDs)
+    public static function deleteByID($deletedID)
     {
-        $model = Files::find()->where(['in', 'id', $deletedIDs])->all();
+        $model = Files::find()->where(['folder_id' => $deletedID])->all();
         foreach ($model as $value){
             $value->delete();
+            unlink(Yii::getAlias('@frontend/web') . $value->file_path . '/' . $value->file_name);
         }
     }
 }

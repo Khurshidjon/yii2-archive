@@ -28,58 +28,62 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <table class="table table-bordered table-striped margin-b-none">
         <thead>
-        <tr>
-            <th></th>
-            <th>Умумий маълумотлар</th>
-            <th>Файл маълумотлари</th>
-            <th>Файл</th>
-        </tr>
+            <tr>
+                <th>Файл ҳақида маълумотлар</th>
+                <th style="width: 30%">Файл</th>
+                <th>Ўчириш</th>
+            </tr>
         </thead>
         <tbody class="form-options-body">
             <tr class="form-options-item">
-                <td class="sortable-handle text-center vcenter" style="cursor: move;">
-                    <i class="far fa-arrows"></i>
-                </td>
                 <td class="vcenter">
                     <div class="row">
                         <div class="col-md-12">
                             <?= $form->field($modelOptionValue, "title")->textInput(['maxlength' => 128]); ?>
                         </div>
-                        <div class="col-md-9">
-                            <?= $form->field($modelOptionValue, "category_id")->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Categories::find()->where(['not', ['parent_id' => null]])->all(), 'id', 'title'), ['prompt' => 'Пожалуйста выберите']) ?>
-                            <?= $form->field($modelOptionValue, "folder_id")->hiddenInput(['value' => $modelOptionValue->folder_id])->label(false) ?>
+                        <div class="col-md-6">
+                            <?= $form->field($modelOptionValue, "category_id")->dropDownList(
+                                \yii\helpers\ArrayHelper::map(\common\models\Categories::find()->where(['is_parent' => 0])->all(), 'id', 'title'),
+                                [
+                                    'prompt' => 'Пожалуйста выберите'
+                                ]) ?>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <?= $form->field($modelOptionValue, "file_page_count")->textInput(['maxlength' => 128]); ?>
                         </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <?= $form->field($modelOptionValue, "document_number")->textInput(['maxlength' => true]) ?>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <?php
-                                $modelOptionValue->document_date = date("d-m-Y", $modelOptionValue->document_date);
+                                $modelOptionValue->document_date = date("d-m-Y", $modelOptionValue->document_date)
                             ?>
                             <?= $form->field($modelOptionValue, "document_date")->widget(\kartik\date\DatePicker::className(), [
                                 'options' => [
-                                    'autocomplete'=>'off',
+                                    'autocomplete' => 'off',
                                     'readOnly' => true,
-                                    'style' => 'background:white'
+                                    'style' => 'background:white',
+                                    'class' => 'form-control document_date'
                                 ],
                                 'pluginOptions' => [
-                                    'autoclose'=>true,
+                                    'autoclose' => true,
                                     'format' => 'dd-mm-yyyy'
                                 ]
                             ]) ?>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <?= $form->field($modelOptionValue, "document_author")->textInput(['maxlength' => true]) ?>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
-                            <?= $form->field($modelOptionValue, "document_description")->textarea(['rows' => 4]) ?>
+<!--                            --><?php //$form->field($modelOptionValue, "languages[]")->widget(\kartik\select2\Select2::className(), [
+//                                'data' => \yii\helpers\ArrayHelper::map(\common\models\Languages::find()->all(), 'id', 'title'),
+//                                'options' => [
+//                                    'multiple' => true,
+//                                    'prompt' => 'Пожалуйста выберите'
+//                                ]
+//                            ]) ?>
+                        </div>
+                        <div class="col-md-12">
+                            <?= $form->field($modelOptionValue, "document_description")->textarea(['rows' => 4, 'cols' => 40]) ?>
                         </div>
                     </div>
                 </td>
@@ -104,11 +108,11 @@ $this->params['breadcrumbs'][] = 'Update';
                                 }
                             }
                             ?>
-                            <?= $form->field($modelOptionValue, "fileInput")->label(false)->widget(FileInput::classname(), [
+                            <?= $form->field($modelOptionValue, "fileInput")->widget(FileInput::classname(), [
                                 'options' => [
                                     'multiple' => false,
-//                                        'accept' => 'image/*',
-//                                        'class' => 'optionvalue-img'
+    //                                        'accept' => 'image/*',
+    //                                        'class' => 'optionvalue-img'
                                 ],
                                 'pluginOptions' => [
                                     'previewFileType' => 'image',
@@ -124,8 +128,7 @@ $this->params['breadcrumbs'][] = 'Update';
                                     'removeLabel' => ' Удалить',
                                     'removeIcon' => '<i class="fas fa-trash"></i>',
                                     'previewSettings' => [
-//                                        'image' => ['width' => '208px', 'height' => 'auto'],
-//                                        'video' => ['width' => '248px', 'height' => 'auto'],
+                                        //'image' => ['width' => '138px', 'height' => 'auto']
                                     ],
                                     'previewFileIconSettings' => [
                                         'doc' => '<i class="fas fa-file-word text-primary"></i>',
@@ -148,6 +151,9 @@ $this->params['breadcrumbs'][] = 'Update';
                             ]) ?>
                         </div>
                     </div>
+                </td>
+                <td class="text-center vcenter">
+                    <button type="button" class="delete-item btn btn-danger btn-xs"><i class="fas fa-minus"></i></button>
                 </td>
             </tr>
         </tbody>
