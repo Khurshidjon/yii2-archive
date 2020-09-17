@@ -167,24 +167,11 @@ AppAssetBackendArchive::register($this);
                                 </a>
                             </li>
                             <li class="app-sidebar__heading">Меню</li>
-                            <li class="<?=Url::hasActive(['languages'])?'mm-active':''?> <?=Url::hasActive(['categories'])?'active':''?>">
-                                <a href="#" class="<?=Url::hasActive(['languages'])?'mm-active':''?> <?=Url::hasActive(['categories'])?'mm-active':''?>">
+                            <li>
+                                <a href="<?= \yii\helpers\Url::to('/categories')?>" class="<?=Url::hasActive(['categories'])?'mm-active':''?> <?=Url::hasActive(['categories'])?'mm-active':''?>">
                                     <i class="metismenu-icon pe-7s-keypad"></i>
-                                    Книги
-                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    Категории
                                 </a>
-                                <ul>
-                                    <li>
-                                        <a href="<?= \yii\helpers\Url::to('/languages')?>" class="<?=Url::hasActive(['languages'])?'mm-active':''?>">
-                                            <i class="metismenu-icon"></i>Языки
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?= \yii\helpers\Url::to('/categories')?>" class="<?=Url::hasActive(['categories'])?'mm-active':''?>">
-                                            <i class="metismenu-icon"></i>Категории
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
                             <li>
                                 <a href="<?= \yii\helpers\Url::toRoute('/folders')?>" class="<?=Url::hasActive(['folders'])?'active':''?> <?=Url::hasActive(['files'])?'active':''?>">
