@@ -14,10 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="files-index">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Папка яратиш', [\yii\helpers\Url::toRoute(['folders/child-create', 'folder_id' => $folder_id])], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Файл қўшиш', ['create?folder_id='.$folder_id], ['class' => 'btn btn-info']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
