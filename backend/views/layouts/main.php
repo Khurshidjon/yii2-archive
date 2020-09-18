@@ -20,7 +20,7 @@ AppAssetBackendArchive::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <?php
-    $result = Yii::$app->request->get('FilesSearch')['title'];
+    $result = Yii::$app->request->get();
     if ($result == ''){
         $result = '';
     }else{
