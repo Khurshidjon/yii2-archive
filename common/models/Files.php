@@ -67,7 +67,7 @@ class Files extends \yii\db\ActiveRecord
                 [['title', 'fileInput', 'category_id'], 'required'],
                 [['languages', 'document_date'], 'safe'],
                 [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
-                [['fileInput'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
+                [['fileInput'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'M4A', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
                 [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
                 [['folder_id'], 'exist', 'skipOnError' => true, 'targetClass' => Folders::className(), 'targetAttribute' => ['folder_id' => 'id']],
             ];
@@ -78,7 +78,7 @@ class Files extends \yii\db\ActiveRecord
                 [['title', 'category_id'], 'required'],
                 [['languages', 'document_date'], 'safe'],
                 [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
-                [['fileInput'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
+                [['fileInput'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'M4A', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
                 [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
                 [['folder_id'], 'exist', 'skipOnError' => true, 'targetClass' => Folders::className(), 'targetAttribute' => ['folder_id' => 'id']],
             ];
