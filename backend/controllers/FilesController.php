@@ -41,7 +41,7 @@ class FilesController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['index', 'create', 'update', 'view', 'delete'],
+                        'actions' => ['index', 'create', 'update', 'view', 'search-result', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -160,6 +160,17 @@ class FilesController extends Controller
 
         return $this->redirect(['index', 'id' => $folder_id]);
     }
+
+    public function actionSearchResult()
+    {
+        $searchModel = new FilesSearch();
+        $dataProvider = $searchModel->searchResult(Yii::$app->request->queryParams);
+        return $this->render('search-result', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
 
     /**
      * Finds the Files model based on its primary key value.

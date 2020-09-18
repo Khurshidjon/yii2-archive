@@ -19,6 +19,14 @@ AppAssetBackendArchive::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <?php
+    $result = Yii::$app->request->get('FilesSearch')['title'];
+    if ($result == ''){
+        $result = '';
+    }else{
+        $result = Yii::$app->request->get('FilesSearch')['title'];
+    }
+    ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -57,34 +65,18 @@ AppAssetBackendArchive::register($this);
                 </span>
             </div>
             <div class="app-header__content">
-                <div class="app-header-left">
-                    <div class="search-wrapper">
-                        <div class="input-holder">
-                            <input type="text" class="search-input" placeholder="Type to search">
-                            <button class="search-icon"><span></span></button>
+                <div class="container">
+                    <form action="<?= Url::toRoute(['files/search-result'])?>" class="app-header-left row">
+                        <div class="col-10">
+                            <input type="text" class="form-control" name="FilesSearch[title]" value="<?= $result ?>" placeholder="Izlash uchun matn kiriting...">
                         </div>
-                        <button class="close"></button>
-                    </div>
-                    <ul class="header-menu nav">
-                        <li class="nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-database"> </i>
-                                Statistics
-                            </a>
-                        </li>
-                        <li class="btn-group nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-edit"></i>
-                                Projects
-                            </a>
-                        </li>
-                        <li class="dropdown nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-cog"></i>
-                                Settings
-                            </a>
-                        </li>
-                    </ul>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-lg btn-success">
+                                <i class="nav-link-icon fa fa-search"> </i>
+                                ҚИДИРИШ
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 <div class="app-header-right">
                     <div class="header-btn-lg pr-0">
