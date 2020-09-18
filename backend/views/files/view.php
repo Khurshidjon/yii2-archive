@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         $modelFile = \common\models\Files::findOne($model->id);
         $initialPreview = '';
         if ($modelFile) {
-            $pathFile =  $modelFile->file_path.'/'.$modelFile->file_name . '.' . $modelFile->file_extension;
+            $pathFile =  \yii\helpers\Url::base(true). $modelFile->file_path.'/'.$modelFile->file_name . '.' . $modelFile->file_extension;
             if (in_array($modelFile->file_extension, array("jpg", "png", "jpeg", "JPG", "PNG", "JPEG"))){
                 $initialPreview = Html::img($pathFile, ['style' => 'width: 200px; 120px']);
             }elseif (in_array($modelFile->file_extension, array("mp4", "mov", "avi"))){
@@ -37,8 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
             }elseif (in_array($modelFile->file_extension, array("mp3", "m4a"))){
                 $initialPreview = '<audio src="'. $pathFile .'" class="w-100" controls height="160"></video>';
             }elseif ($modelFile->file_extension == 'pdf'){
-                $initialPreview = '<iframe class="w-100" src="' . $pathFile .'"></iframe>';
-            }elseif ($modelFile->file_extension == 'docx'){
                 $initialPreview = '<iframe class="w-100" src="' . $pathFile .'"></iframe>';
             }else{
                 $initialPreview = Yii::$app->params['previewFileIconSettings'][$modelFile->file_extension];
