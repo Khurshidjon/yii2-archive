@@ -64,7 +64,11 @@ $this->params['breadcrumbs'][] = 'Update';
                                 ],
                                 'pluginOptions' => [
                                     'autoclose' => true,
-                                    'format' => 'dd-mm-yyyy'
+                                    'changemonth' => false,
+                                    'type' => \kartik\date\DatePicker::TYPE_COMPONENT_PREPEND,
+                                    'changeyear' => true,
+                                    'format' => 'yyyy',
+                                    'yearrange' => '1990:2020'
                                 ]
                             ]) ?>
                         </div>
@@ -94,11 +98,13 @@ $this->params['breadcrumbs'][] = 'Update';
                             $modelFile = \common\models\Files::findOne($modelOptionValue->id);
                             $initialPreview = [];
                             if ($modelFile) {
-                                $pathFile =  'http://front.archive.loc' .$modelFile->file_path.'/'.$modelFile->file_name;
+                                    $pathFile =  $modelFile->file_path.'/'.$modelFile->file_name . '.' . $modelFile->file_extension;
                                 if (in_array($modelFile->file_extension, array("jpg", "png", "jpeg", "JPG", "PNG", "JPEG"))){
                                     $initialPreview[] = Html::img($pathFile, ['style' => 'width: 200px; 120px']);
                                 }elseif (in_array($modelFile->file_extension, array("mp4", "mov", "avi"))){
                                     $initialPreview[] = '<video src="'. $pathFile .'" class="w-100" controls height="160"></video>';
+                                }elseif (in_array($modelFile->file_extension, array("mp3", "m4a"))){
+                                    $initialPreview[] = '<audio src="'. $pathFile .'" class="w-100" controls height="160"></video>';
                                 }elseif ($modelFile->file_extension == 'pdf'){
                                     $initialPreview[] = '<iframe class="w-100" src="' . $pathFile .'"></iframe>';
                                 }elseif ($modelFile->file_extension == 'docx'){
@@ -111,8 +117,6 @@ $this->params['breadcrumbs'][] = 'Update';
                             <?= $form->field($modelOptionValue, "fileInput")->widget(FileInput::classname(), [
                                 'options' => [
                                     'multiple' => false,
-    //                                        'accept' => 'image/*',
-    //                                        'class' => 'optionvalue-img'
                                 ],
                                 'pluginOptions' => [
                                     'previewFileType' => 'image',

@@ -39,6 +39,7 @@ class Files extends \yii\db\ActiveRecord
 
     public $fileInput;
     public $languages;
+    public $downloadButton;
 
     public function behaviors()
     {
@@ -67,7 +68,7 @@ class Files extends \yii\db\ActiveRecord
                 [['title', 'fileInput', 'category_id'], 'required'],
                 [['languages', 'document_date'], 'safe'],
                 [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
-                [['fileInput'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'M4A', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
+                [['fileInput'], 'file', 'skipOnEmpty' => true, 'maxSize' => 1024 * 1024 * 100],
                 [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
                 [['folder_id'], 'exist', 'skipOnError' => true, 'targetClass' => Folders::className(), 'targetAttribute' => ['folder_id' => 'id']],
             ];
@@ -78,7 +79,7 @@ class Files extends \yii\db\ActiveRecord
                 [['title', 'category_id'], 'required'],
                 [['languages', 'document_date'], 'safe'],
                 [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
-                [['fileInput'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'M4A', 'jpeg', 'mp4', 'mp3', 'pdf', 'doc', 'docx', 'xls', 'xlsx']],
+                [['fileInput'], 'file', 'skipOnEmpty' => true],
                 [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
                 [['folder_id'], 'exist', 'skipOnError' => true, 'targetClass' => Folders::className(), 'targetAttribute' => ['folder_id' => 'id']],
             ];
@@ -102,6 +103,7 @@ class Files extends \yii\db\ActiveRecord
             'document_date' => 'Нашр этилган сана',
             'document_description' => 'Файл тавсифи',
             'document_author' => 'Муаллиф',
+            'downloadButton' => 'Юклаш',
             'file_name' => 'File Name',
             'file_size' => 'Файл хажми',
             'file_extension' => 'File Extension',
@@ -109,6 +111,7 @@ class Files extends \yii\db\ActiveRecord
             'languages' => 'Тили',
             'created_at' => 'Яратилган вақти',
             'updated_at' => 'Ўзгартирилган вақти',
+            'fileInput' => 'Файл'
         ];
     }
 
@@ -116,15 +119,15 @@ class Files extends \yii\db\ActiveRecord
     public function upload($file)
     {
         $base_directory = Yii::getAlias('@frontend/web');
-        $db_path = '/files/'.date('Y').'/'.date('m').'/'.date('d');
+        $db_path = '/uploads/'.date('Y').'/'.date('m').'/'.date('d');
         $new_directory = $base_directory.$db_path;
         if(!is_dir($new_directory)) {
             mkdir($new_directory, 0777, true);
         }
         if($file != null){
-            $filename = $file->baseName;
+            $filename = 'file_'.$this->id.'_'.md5($file->baseName);
             $file_dir = $new_directory .'/'. $filename;
-            $this->file_name = $file->name;
+            $this->file_name = $filename;
             $this->file_size = $file->size;
             $this->file_path = $db_path;
             $this->file_extension = $file->extension;
