@@ -39,17 +39,7 @@ $this->params['breadcrumbs'][] = 'Update';
                 <td class="vcenter">
                     <div class="row">
                         <div class="col-md-12">
-                            <?= $form->field($modelOptionValue, "title")->textInput(['maxlength' => 128]); ?>
-                        </div>
-                        <div class="col-md-6">
-                            <?= $form->field($modelOptionValue, "category_id")->dropDownList(
-                                \yii\helpers\ArrayHelper::map(\common\models\Categories::find()->where(['is_parent' => 0])->all(), 'id', 'title'),
-                                [
-                                    'prompt' => 'Пожалуйста выберите'
-                                ]) ?>
-                        </div>
-                        <div class="col-md-6">
-                            <?= $form->field($modelOptionValue, "file_page_count")->textInput(['maxlength' => 128]); ?>
+                            <?= $form->field($modelOptionValue, "title")->textInput(['maxlength' => 255]); ?>
                         </div>
                         <div class="col-md-6">
                             <?php
@@ -78,16 +68,7 @@ $this->params['breadcrumbs'][] = 'Update';
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-<!--                            --><?php //$form->field($modelOptionValue, "languages[]")->widget(\kartik\select2\Select2::className(), [
-//                                'data' => \yii\helpers\ArrayHelper::map(\common\models\Languages::find()->all(), 'id', 'title'),
-//                                'options' => [
-//                                    'multiple' => true,
-//                                    'prompt' => 'Пожалуйста выберите'
-//                                ]
-//                            ]) ?>
-                        </div>
-                        <div class="col-md-12">
-                            <?= $form->field($modelOptionValue, "document_description")->textarea(['rows' => 4, 'cols' => 40]) ?>
+                            <?= $form->field($modelOptionValue, "document_description")->textarea(['rows' => 2, 'cols' => 40]) ?>
                         </div>
                     </div>
                 </td>
