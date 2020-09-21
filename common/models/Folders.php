@@ -96,4 +96,34 @@ class Folders extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Files::className(), ['folder_id' => 'id'])->count();
     }
+
+    /**
+     * Gets query for [[Files]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFileCountChild()
+    {
+        $result = 0;
+        if ($this->parent_id != null){
+            $result = $this->hasMany(Files::className(), ['folder_id' => 'id'])->count();
+        }else{
+            $folder_with_files = Folders::find()->select('id')->where(['parent_id' => $this->id]);
+
+            $files = Files::find()->where(['in', 'folder_id', $folder_with_files])->count();
+            $files_in = $this->hasMany(Files::className(), ['folder_id' => 'id'])->count();
+            $result = $files + $files_in;
+        }
+        return $result;
+    }
+
+    /**
+     * Gets query for [[Files]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getChildren()
+    {
+        return $this->hasMany(Folders::className(), ['parent_id' => 'id']);
+    }
 }

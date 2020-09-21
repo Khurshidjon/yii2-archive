@@ -173,8 +173,8 @@ AppAssetArchive::register($this);
             <div class="header-bottom pb--10">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-lg-3">
-                            <nav class="category-nav   ">
+                        <!--<div class="col-lg-3">
+                            <nav class="category-nav">
                                 <div>
                                     <a href="javascript:void(0)" class="category-trigger"><i
                                                 class="fa fa-bars"></i>Browse
@@ -283,8 +283,8 @@ AppAssetArchive::register($this);
                                     </ul>
                                 </div>
                             </nav>
-                        </div>
-                        <div class="col-lg-5">
+                        </div>-->
+                        <div class="col-lg-8">
                             <div class="header-search-block">
                                 <input type="text" placeholder="Search entire store here">
                                 <button>Search</button>
@@ -682,24 +682,52 @@ AppAssetArchive::register($this);
                 </div>
             </div>
         </section>
-        <?= $content ?>
+        <main class="inner-page-sec-padding-bottom">
+            <div class="container">
+                <div class="row">
+                    <?= $content ?>
+                    <div class="col-lg-3  mt--40 mt-lg--0">
+                        <div class="inner-page-sidebar">
+                            <!-- Accordion -->
+                            <div class="single-block">
+                                <h3 class="sidebar-title">Categories</h3>
+                                <ul class="sidebar-menu--shop">
+                                    <?php foreach (\common\models\Folders::find()->where(['parent_id' => null])->all() as $item):?>
+                                        <li><a href="#"><?= $item->title ?> (<?= $item->fileCountChild?>)</a></li>
+                                        <?php if ($item->fileCountChild): ?>
+                                            <ul class="inner-cat-items">
+                                                <?php foreach ($item->children as $child):?>
+                                                    <li><a href="#"><?= $child->title; ?> (<?= $child->fileCount?>)</a></li>
+                                                <?php endforeach;?>
+                                            </ul>
+                                        <?php endif?>
+                                    <?php endforeach;?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
 
     <section class="section-margin">
         <h2 class="sr-only">Brand Slider</h2>
         <div class="container">
-            <div class="brand-slider sb-slick-slider border-top border-bottom" data-slick-setting='{
-                                            "autoplay": true,
-                                            "autoplaySpeed": 8000,
-                                            "slidesToShow": 6
-                                            }' data-slick-responsive='[
-                {"breakpoint":992, "settings": {"slidesToShow": 4} },
-                {"breakpoint":768, "settings": {"slidesToShow": 3} },
-                {"breakpoint":575, "settings": {"slidesToShow": 3} },
-                {"breakpoint":480, "settings": {"slidesToShow": 2} },
-                {"breakpoint":320, "settings": {"slidesToShow": 1} }
-            ]'>
+            <div class="brand-slider sb-slick-slider border-top border-bottom"
+                 data-slick-setting='{
+                    "autoplay": true,
+                    "autoplaySpeed": 8000,
+                    "slidesToShow": 6
+                 }'
+                 data-slick-responsive='[
+                    {"breakpoint":992, "settings": {"slidesToShow": 4} },
+                    {"breakpoint":768, "settings": {"slidesToShow": 3} },
+                    {"breakpoint":575, "settings": {"slidesToShow": 3} },
+                    {"breakpoint":480, "settings": {"slidesToShow": 2} },
+                    {"breakpoint":320, "settings": {"slidesToShow": 1} }
+                ]'>
                 <div class="single-slide">
                     <img src="template/image/others/brand-1.jpg" alt="">
                 </div>
