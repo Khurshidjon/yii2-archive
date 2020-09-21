@@ -44,7 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
                           "asNavFor": ".product-slider-nav"
                           }'>
                                 <div class="single-slide">
-                                    <span class="image-show-category-title"><?= $model->category->title ?></span>
+                                    <div class="image-index-category-box">
+                                        <p class="image-show-category-title"><?= $model->category->title ?></p>
+                                    </div>
                                     <img src="/template/image/products/product-1.png" alt="">
                                 </div>
                             </div>

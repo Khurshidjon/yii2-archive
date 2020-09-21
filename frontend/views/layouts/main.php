@@ -4,7 +4,6 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAssetArchive;
 
 AppAssetArchive::register($this);
@@ -17,6 +16,7 @@ AppAssetArchive::register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
+    <?php $this->title = 'Бош саҳифа' ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
@@ -41,7 +41,7 @@ AppAssetArchive::register($this);
                                 </div>
                                 <div class="text">
                                     <p>Free Support 24/7</p>
-                                    <p class="font-weight-bold number">+01-202-555-0181</p>
+                                    <p class="font-weight-bold number">+998901234567</p>
                                 </div>
                             </div>
                         </div>
@@ -281,13 +281,13 @@ AppAssetArchive::register($this);
                                 </div>
                             </nav>
                         </div>-->
-                        <div class="col-lg-9">
+                        <div class="col-lg-8">
                             <div class="header-search-block">
-                                <input type="text" placeholder="Search entire store here">
-                                <button>Search</button>
+                                <input type="text" placeholder="Номи бўйича қидириш...">
+                                <button>қидириш</button>
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="main-navigation flex-lg-right">
                                 <div class="cart-widget">
                                     <?php if(Yii::$app->user->isGuest):?>
@@ -300,7 +300,7 @@ AppAssetArchive::register($this);
                                         <?php if (!Yii::$app->user->isGuest):?>
                                             <div class="cart-total">
 											<span class="text-number">
-												2
+												1
 											</span>
                                                 <span class="text-item">
 												<?= Yii::$app->user->identity->username?>
