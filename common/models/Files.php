@@ -65,7 +65,7 @@ class Files extends \yii\db\ActiveRecord
             return [
                 [['folder_id', 'category_id', 'view_count', 'download_count', 'file_page_count'], 'integer'],
                 [['document_description'], 'string'],
-                [['title', 'fileInput', 'category_id'], 'required'],
+                [['title', 'fileInput'], 'required'],
                 [['languages', 'document_date'], 'safe'],
                 [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
                 [['fileInput'], 'file', 'skipOnEmpty' => true, 'maxSize' => 1024 * 1024 * 100],
@@ -76,7 +76,7 @@ class Files extends \yii\db\ActiveRecord
             return [
                 [['folder_id', 'category_id', 'view_count', 'download_count', 'file_page_count'], 'integer'],
                 [['document_description'], 'string'],
-                [['title', 'category_id'], 'required'],
+                [['title'], 'required'],
                 [['languages', 'document_date'], 'safe'],
                 [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
                 [['fileInput'], 'file', 'skipOnEmpty' => true],

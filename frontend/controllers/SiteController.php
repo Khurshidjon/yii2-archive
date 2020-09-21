@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Files;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -74,7 +75,22 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $files = Files::find()->all();
+        return $this->render('index', [
+            'files' => $files
+        ]);
+    }
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionShow()
+    {
+        $files = Files::find()->all();
+        return $this->render('index', [
+            'files' => $files
+        ]);
     }
 
     /**

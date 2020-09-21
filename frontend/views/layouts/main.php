@@ -173,8 +173,8 @@ AppAssetArchive::register($this);
             <div class="header-bottom pb--10">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-lg-3">
-                            <nav class="category-nav   ">
+                        <!--<div class="col-lg-3">
+                            <nav class="category-nav">
                                 <div>
                                     <a href="javascript:void(0)" class="category-trigger"><i
                                                 class="fa fa-bars"></i>Browse
@@ -283,8 +283,8 @@ AppAssetArchive::register($this);
                                     </ul>
                                 </div>
                             </nav>
-                        </div>
-                        <div class="col-lg-5">
+                        </div>-->
+                        <div class="col-lg-8">
                             <div class="header-search-block">
                                 <input type="text" placeholder="Search entire store here">
                                 <button>Search</button>
@@ -356,108 +356,7 @@ AppAssetArchive::register($this);
                                     <a href="javascript:void(0)" class="category-trigger"><i
                                                 class="fa fa-bars"></i>Browse
                                         categories</a>
-                                    <ul class="category-menu">
-                                        <li class="cat-item has-children">
-                                            <a href="#">Arts & Photography</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="#">Bags & Cases</a></li>
-                                                <li><a href="#">Binoculars & Scopes</a></li>
-                                                <li><a href="#">Digital Cameras</a></li>
-                                                <li><a href="#">Film Photography</a></li>
-                                                <li><a href="#">Lighting & Studio</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="cat-item has-children mega-menu"><a href="#">Biographies</a>
-                                            <ul class="sub-menu">
-                                                <li class="single-block">
-                                                    <h3 class="title">WHEEL SIMULATORS</h3>
-                                                    <ul>
-                                                        <li><a href="#">Bags & Cases</a></li>
-                                                        <li><a href="#">Binoculars & Scopes</a></li>
-                                                        <li><a href="#">Digital Cameras</a></li>
-                                                        <li><a href="#">Film Photography</a></li>
-                                                        <li><a href="#">Lighting & Studio</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="single-block">
-                                                    <h3 class="title">WHEEL SIMULATORS</h3>
-                                                    <ul>
-                                                        <li><a href="#">Bags & Cases</a></li>
-                                                        <li><a href="#">Binoculars & Scopes</a></li>
-                                                        <li><a href="#">Digital Cameras</a></li>
-                                                        <li><a href="#">Film Photography</a></li>
-                                                        <li><a href="#">Lighting & Studio</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="single-block">
-                                                    <h3 class="title">WHEEL SIMULATORS</h3>
-                                                    <ul>
-                                                        <li><a href="#">Bags & Cases</a></li>
-                                                        <li><a href="#">Binoculars & Scopes</a></li>
-                                                        <li><a href="#">Digital Cameras</a></li>
-                                                        <li><a href="#">Film Photography</a></li>
-                                                        <li><a href="#">Lighting & Studio</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="single-block">
-                                                    <h3 class="title">WHEEL SIMULATORS</h3>
-                                                    <ul>
-                                                        <li><a href="#">Bags & Cases</a></li>
-                                                        <li><a href="#">Binoculars & Scopes</a></li>
-                                                        <li><a href="#">Digital Cameras</a></li>
-                                                        <li><a href="#">Film Photography</a></li>
-                                                        <li><a href="#">Lighting & Studio</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="cat-item has-children"><a href="#">Business & Money</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="">Brake Tools</a></li>
-                                                <li><a href="">Driveshafts</a></li>
-                                                <li><a href="">Emergency Brake</a></li>
-                                                <li><a href="">Spools</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="cat-item has-children"><a href="#">Calendars</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="">Brake Tools</a></li>
-                                                <li><a href="">Driveshafts</a></li>
-                                                <li><a href="">Emergency Brake</a></li>
-                                                <li><a href="">Spools</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="cat-item has-children"><a href="#">Children's Books</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="">Brake Tools</a></li>
-                                                <li><a href="">Driveshafts</a></li>
-                                                <li><a href="">Emergency Brake</a></li>
-                                                <li><a href="">Spools</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="cat-item has-children"><a href="#">Comics</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="">Brake Tools</a></li>
-                                                <li><a href="">Driveshafts</a></li>
-                                                <li><a href="">Emergency Brake</a></li>
-                                                <li><a href="">Spools</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="cat-item"><a href="#">Perfomance Filters</a></li>
-                                        <li class="cat-item has-children"><a href="#">Cookbooks</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="">Brake Tools</a></li>
-                                                <li><a href="">Driveshafts</a></li>
-                                                <li><a href="">Emergency Brake</a></li>
-                                                <li><a href="">Spools</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="cat-item "><a href="#">Accessories</a></li>
-                                        <li class="cat-item "><a href="#">Education</a></li>
-                                        <li class="cat-item hidden-menu-item"><a href="#">Indoor Living</a></li>
-                                        <li class="cat-item"><a href="#" class="js-expand-hidden-menu">More
-                                                Categories</a></li>
-                                    </ul>
+                                   
                                 </div>
                             </nav>
                         </div>
@@ -783,24 +682,52 @@ AppAssetArchive::register($this);
                 </div>
             </div>
         </section>
-        <?= $content ?>
+        <main class="inner-page-sec-padding-bottom">
+            <div class="container">
+                <div class="row">
+                    <?= $content ?>
+                    <div class="col-lg-3  mt--40 mt-lg--0">
+                        <div class="inner-page-sidebar">
+                            <!-- Accordion -->
+                            <div class="single-block">
+                                <h3 class="sidebar-title">Categories</h3>
+                                <ul class="sidebar-menu--shop">
+                                    <?php foreach (\common\models\Folders::find()->where(['parent_id' => null])->all() as $item):?>
+                                        <li><a href="#"><?= $item->title ?> (<?= $item->fileCountChild?>)</a></li>
+                                        <?php if ($item->fileCountChild): ?>
+                                            <ul class="inner-cat-items">
+                                                <?php foreach ($item->children as $child):?>
+                                                    <li><a href="#"><?= $child->title; ?> (<?= $child->fileCount?>)</a></li>
+                                                <?php endforeach;?>
+                                            </ul>
+                                        <?php endif?>
+                                    <?php endforeach;?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
 
     <section class="section-margin">
         <h2 class="sr-only">Brand Slider</h2>
         <div class="container">
-            <div class="brand-slider sb-slick-slider border-top border-bottom" data-slick-setting='{
-                                            "autoplay": true,
-                                            "autoplaySpeed": 8000,
-                                            "slidesToShow": 6
-                                            }' data-slick-responsive='[
-                {"breakpoint":992, "settings": {"slidesToShow": 4} },
-                {"breakpoint":768, "settings": {"slidesToShow": 3} },
-                {"breakpoint":575, "settings": {"slidesToShow": 3} },
-                {"breakpoint":480, "settings": {"slidesToShow": 2} },
-                {"breakpoint":320, "settings": {"slidesToShow": 1} }
-            ]'>
+            <div class="brand-slider sb-slick-slider border-top border-bottom"
+                 data-slick-setting='{
+                    "autoplay": true,
+                    "autoplaySpeed": 8000,
+                    "slidesToShow": 6
+                 }'
+                 data-slick-responsive='[
+                    {"breakpoint":992, "settings": {"slidesToShow": 4} },
+                    {"breakpoint":768, "settings": {"slidesToShow": 3} },
+                    {"breakpoint":575, "settings": {"slidesToShow": 3} },
+                    {"breakpoint":480, "settings": {"slidesToShow": 2} },
+                    {"breakpoint":320, "settings": {"slidesToShow": 1} }
+                ]'>
                 <div class="single-slide">
                     <img src="template/image/others/brand-1.jpg" alt="">
                 </div>

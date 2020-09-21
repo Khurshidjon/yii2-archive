@@ -49,16 +49,6 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                 <?= $form->field($modelOptionValue, "[{$index}]title")->textInput(['maxlength' => 128]); ?>
                             </div>
                             <div class="col-md-6">
-                                <?= $form->field($modelOptionValue, "[{$index}]category_id")->dropDownList(
-                                        \yii\helpers\ArrayHelper::map(\common\models\Categories::find()->where(['is_parent' => 0])->all(), 'id', 'title'),
-                                        [
-                                            'prompt' => 'Пожалуйста выберите'
-                                        ]) ?>
-                            </div>
-                            <div class="col-md-6">
-                                <?= $form->field($modelOptionValue, "[{$index}]file_page_count")->textInput(['maxlength' => 128]); ?>
-                            </div>
-                            <div class="col-md-6">
                                 <?= $form->field($modelOptionValue, "[{$index}]document_date")->widget(\kartik\date\DatePicker::className(), [
                                     'options' => [
                                         'autocomplete' => 'off',
@@ -78,16 +68,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-<!--                                --><?php //$form->field($modelOptionValue, "[{$index}]languages[]")->widget(\kartik\select2\Select2::className(), [
-//                                    'data' => \yii\helpers\ArrayHelper::map(\common\models\Languages::find()->all(), 'id', 'title'),
-//                                    'options' => [
-//                                        'multiple' => true,
-//                                        'prompt' => 'Пожалуйста выберите'
-//                                    ]
-//                                ]) ?>
-                            </div>
-                            <div class="col-md-12">
-                                <?= $form->field($modelOptionValue, "[{$index}]document_description")->textarea(['rows' => 4, 'cols' => 40]) ?>
+                                <?= $form->field($modelOptionValue, "[{$index}]document_description")->textarea(['rows' => 2, 'cols' => 40]) ?>
                             </div>
                         </div>
                     </td>
@@ -111,8 +92,6 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                 <?= $form->field($modelOptionValue, "[{$index}]fileInput")->widget(FileInput::classname(), [
                                     'options' => [
                                         'multiple' => false,
-//                                        'accept' => 'image/*',
-//                                        'class' => 'optionvalue-img'
                                     ],
                                     'pluginOptions' => [
                                         'previewFileType' => 'image',
@@ -145,7 +124,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                             'mp3' => '<i class="fas fa-file-audio text-warning"></i>',
                                             'jpg' => '<i class="fas fa-file-photo text-warning"></i>',
                                         ],
-//                                        'initialPreview' => $initialPreview,
+                                       'initialPreview' => $initialPreview,
                                         'layoutTemplates' => ['footer' => '']
                                     ]
                                 ]) ?>

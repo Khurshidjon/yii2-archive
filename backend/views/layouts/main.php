@@ -160,15 +160,9 @@ AppAssetBackendArchive::register($this);
                             </li>
                             <li class="app-sidebar__heading">Меню</li>
                             <li>
-                                <a href="<?= \yii\helpers\Url::to('/categories')?>" class="<?=Url::hasActive(['categories'])?'mm-active':''?> <?=Url::hasActive(['categories'])?'mm-active':''?>">
-                                    <i class="metismenu-icon pe-7s-keypad"></i>
-                                    Категории
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?= \yii\helpers\Url::toRoute('/folders')?>" class="<?=Url::hasActive(['folders'])?'active':''?> <?=Url::hasActive(['files'])?'active':''?>">
+                                <a href="<?= \yii\helpers\Url::toRoute('/folders')?>" class="<?=Url::hasActive(['folders'])?'mm-active':''?> <?=Url::hasActive(['files'])?'mm-active':''?>">
                                     <i class="metismenu-icon pe-7s-folder"></i>
-                                    Файл
+                                    Файлы
                                 </a>
                             </li>
                     <!--        <li>
@@ -291,9 +285,6 @@ AppAssetBackendArchive::register($this);
             </div>
             <div class="app-main__outer">
                 <div class="container-fluid h-auto mt-4">
-                    <?= \yii\bootstrap4\Breadcrumbs::widget([
-                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                    ]) ?>
                     <?=$content?>
                 </div>
                 <div class="app-wrapper-footer">
