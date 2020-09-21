@@ -15,6 +15,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use function Sodium\increment;
 
 /**
  * Site controller
@@ -75,22 +76,40 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        \Yii::$app->view->registerMetaTag([
+            'name' => 'File Archive',
+            'content' => 'Description of the page...'
+        ]);
+
         $files = Files::find()->all();
         return $this->render('index', [
             'files' => $files
         ]);
     }
+
     /**
      * Displays homepage.
      *
      * @return mixed
+     * @param $id
      */
-    public function actionShow()
+    public function actionShow($id)
     {
-        $files = Files::find()->all();
-        return $this->render('index', [
-            'files' => $files
+        $model = Files::findOne($id);
+        return $this->render('show', [
+            'model' => $model
         ]);
+    }/**
+     * Displays homepage.
+     *
+     * @return mixed
+     * @param $id
+     */
+    public function actionDownload($id)
+    {
+        $file = Files::findOne($id)->download_count;
+        increment($file);
+        return 'ok';
     }
 
     /**

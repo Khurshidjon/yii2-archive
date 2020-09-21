@@ -16520,7 +16520,7 @@ input[type="number"] {
 .cart-block {
   padding: 10px 0; }
   .cart-block:before {
-    content: "\f23d";
+    content: "\f198";
     font-family: "Font Awesome 5 Brands";
     font-size: 34px;
     color: #62ab00;
@@ -21514,3 +21514,31 @@ p.form-messege {
           transform: rotate(90deg); }
   .accordion .card .card-body {
     padding: 0 30px 30px; }
+.image-show-category-title{
+  position: absolute;
+  font-size: 24px;
+  background: -webkit-linear-gradient(#ffaf0f, #915608);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  z-index: 3 !important;
+  top: 40%;
+  left: 30%;
+}
+.image-index-category-box{
+  position: absolute;
+  left: 50%;
+  top: 26%;
+}
+.image-index-category-title{
+  position: relative;
+  font-size: 17px;
+  line-height: 15px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: -webkit-linear-gradient(#ffaf0f, #915608);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  z-index: 3 !important;
+  left: -50%;
+}

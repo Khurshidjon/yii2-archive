@@ -4,11 +4,8 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAssetArchive;
-use common\widgets\Alert;
 
 AppAssetArchive::register($this);
 ?>
@@ -33,8 +30,8 @@ AppAssetArchive::register($this);
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3 ">
-                            <a href="index.html" class="site-brand">
-                                <img src="template/image/logo.png" alt="">
+                            <a href="<?= Yii::$app->homeUrl?>" class="site-brand">
+                                <img src="/template/image/logo.png" alt="">
                             </a>
                         </div>
                         <div class="col-lg-3">
@@ -284,55 +281,55 @@ AppAssetArchive::register($this);
                                 </div>
                             </nav>
                         </div>-->
-                        <div class="col-lg-8">
+                        <div class="col-lg-9">
                             <div class="header-search-block">
                                 <input type="text" placeholder="Search entire store here">
                                 <button>Search</button>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="main-navigation flex-lg-right">
                                 <div class="cart-widget">
+                                    <?php if(Yii::$app->user->isGuest):?>
                                     <div class="login-block">
-                                        <a href="login-register.html" class="font-weight-bold">Login</a> <br>
-                                        <span>or</span><a href="login-register.html">Register</a>
+                                        <a href="<?= \yii\helpers\Url::toRoute(['/site/login'])?>" class="font-weight-bold">Кириш</a> <br>
+                                        <span>ёки</span><a href="<?= \yii\helpers\Url::toRoute(['/site/signup'])?>">рўйхатдан ўтиш</a>
                                     </div>
+                                    <?php endif?>
                                     <div class="cart-block">
-                                        <div class="cart-total">
+                                        <?php if (!Yii::$app->user->isGuest):?>
+                                            <div class="cart-total">
 											<span class="text-number">
-												1
+												2
 											</span>
-                                            <span class="text-item">
-												Shopping Cart
+                                                <span class="text-item">
+												<?= Yii::$app->user->identity->username?>
 											</span>
-                                            <span class="price">
-												£0.00
+                                                <span class="price">
+												<?= Yii::$app->user->identity->email?>
 												<i class="fas fa-chevron-down"></i>
 											</span>
-                                        </div>
-                                        <div class="cart-dropdown-block">
-                                            <div class=" single-cart-block ">
-                                                <div class="cart-product">
-                                                    <a href="product-details.html" class="image">
-                                                        <img src="template/image/products/cart-product-1.jpg" alt="">
-                                                    </a>
-                                                    <div class="content">
-                                                        <h3 class="title"><a href="product-details.html">Kodak PIXPRO
-                                                                Astro Zoom AZ421 16 MP</a></h3>
-                                                        <p class="price"><span class="qty">1 ×</span> £87.34</p>
-                                                        <button class="cross-btn"><i class="fas fa-times"></i></button>
+                                            </div>
+                                            <div class="cart-dropdown-block">
+                                                <div class=" single-cart-block ">
+                                                    <div class="cart-product">
+                                                        <a href="#" class="image">
+                                                            <img src="/template/image/products/cart-product-1.jpg" alt="">
+                                                        </a>
+                                                        <div class="content">
+                                                            <h3 class="title"><a href="#"><?= Yii::$app->user->identity->username?></a></h3>
+                                                            <p class="price"><?= Yii::$app->user->identity->email?></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class=" single-cart-block ">
+                                                    <div class="btn-block">
+                                                        <a href="checkout.html" class="btn btn--primary">Выход <i
+                                                                    class="fas fa-chevron-right"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class=" single-cart-block ">
-                                                <div class="btn-block">
-                                                    <a href="cart.html" class="btn">View Cart <i
-                                                                class="fas fa-chevron-right"></i></a>
-                                                    <a href="checkout.html" class="btn btn--primary">Check Out <i
-                                                                class="fas fa-chevron-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <?php endif;?>
                                     </div>
                                 </div>
                             </div>
@@ -675,40 +672,14 @@ AppAssetArchive::register($this);
                 <div class="breadcrumb-contents">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item active">Shop</li>
+                            <li class="breadcrumb-item"><a href="<?= Yii::$app->homeUrl?>">Бош саҳифа</a></li>
+                            <li class="breadcrumb-item active"><?= $this->title?></li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </section>
-        <main class="inner-page-sec-padding-bottom">
-            <div class="container">
-                <div class="row">
-                    <?= $content ?>
-                    <div class="col-lg-3  mt--40 mt-lg--0">
-                        <div class="inner-page-sidebar">
-                            <!-- Accordion -->
-                            <div class="single-block">
-                                <h3 class="sidebar-title">Categories</h3>
-                                <ul class="sidebar-menu--shop">
-                                    <?php foreach (\common\models\Folders::find()->where(['parent_id' => null])->all() as $item):?>
-                                        <li><a href="#"><?= $item->title ?> (<?= $item->fileCountChild?>)</a></li>
-                                        <?php if ($item->fileCountChild): ?>
-                                            <ul class="inner-cat-items">
-                                                <?php foreach ($item->children as $child):?>
-                                                    <li><a href="#"><?= $child->title; ?> (<?= $child->fileCount?>)</a></li>
-                                                <?php endforeach;?>
-                                            </ul>
-                                        <?php endif?>
-                                    <?php endforeach;?>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+        <?= $content ?>
     </div>
 
 

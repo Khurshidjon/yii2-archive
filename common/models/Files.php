@@ -148,21 +148,11 @@ class Files extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Category]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategory()
-    {
-        return $this->hasOne(Categories::className(), ['id' => 'category_id']);
-    }
-
-    /**
      * Gets query for [[Folder]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getFolder()
+    public function getCategory()
     {
         return $this->hasOne(Folders::className(), ['id' => 'folder_id']);
     }
