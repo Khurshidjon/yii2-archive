@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </div>
                                 <div class="add-to-cart-row">
                                     <div class="add-cart-btn">
-                                        <a href="" class="btn btn-outlined--primary">
+                                        <a href="<?= \yii\helpers\Url::toRoute(['/site/download-file', 'id' => $model->id])?>" class="btn btn-outlined--primary">
                                             <span class="fas fa-download"></span>Юклаб олиш</a>
                                     </div>
                                 </div>

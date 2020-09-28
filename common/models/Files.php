@@ -63,10 +63,10 @@ class Files extends \yii\db\ActiveRecord
     {
         if($this->isNewRecord){
             return [
-                [['folder_id', 'category_id', 'view_count', 'download_count', 'file_page_count'], 'integer'],
+                [['folder_id', 'category_id', 'view_count', 'document_date', 'file_page_count'], 'integer'],
                 [['document_description'], 'string'],
                 [['title', 'fileInput'], 'required'],
-                [['languages', 'document_date'], 'safe'],
+//                [['languages', 'document_date'], 'safe'],
                 [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
                 [['fileInput'], 'file', 'skipOnEmpty' => true, 'maxSize' => 1024 * 1024 * 100],
                 [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
@@ -74,10 +74,10 @@ class Files extends \yii\db\ActiveRecord
             ];
         }else{
             return [
-                [['folder_id', 'category_id', 'view_count', 'download_count', 'file_page_count'], 'integer'],
+                [['folder_id', 'category_id', 'view_count', 'document_date', 'file_page_count'], 'integer'],
                 [['document_description'], 'string'],
                 [['title'], 'required'],
-                [['languages', 'document_date'], 'safe'],
+//                [['languages', 'document_date'], 'safe'],
                 [['title', 'document_number', 'document_author'], 'string', 'max' => 255],
                 [['fileInput'], 'file', 'skipOnEmpty' => true],
                 [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],

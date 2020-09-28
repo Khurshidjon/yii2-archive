@@ -96,7 +96,7 @@ class FilesController extends Controller
 
             foreach ($modelsOptionValue as $index => $modelOptionValue) {
                 $modelOptionValue->folder_id = Yii::$app->request->post('folder_id');
-                $modelOptionValue->document_date = strtotime($modelOptionValue->document_date);
+                $modelOptionValue->document_date = (int)$modelOptionValue->document_date;
                 $file = UploadedFile::getInstance($modelOptionValue, "[{$index}]fileInput");
                 $modelOptionValue->save(false);
                 if ($file != null OR !empty($file)) {
@@ -122,7 +122,8 @@ class FilesController extends Controller
     {
         $modelOptionValue = $this->findModel($id);
         if ($modelOptionValue->load(Yii::$app->request->post())) {
-            $modelOptionValue->document_date = strtotime($modelOptionValue->document_date);
+            $modelOptionValue->document_date = (int)$modelOptionValue->document_date;
+//            vd($modelOptionValue);
             $file = UploadedFile::getInstance($modelOptionValue, "fileInput");
             $modelOptionValue->save(false);
             if ($file != null OR !empty($file)){

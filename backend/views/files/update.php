@@ -42,9 +42,6 @@ $this->params['breadcrumbs'][] = 'Update';
                             <?= $form->field($modelOptionValue, "title")->textInput(['maxlength' => 255]); ?>
                         </div>
                         <div class="col-md-6">
-                            <?php
-                                $modelOptionValue->document_date = date("d-m-Y", $modelOptionValue->document_date)
-                            ?>
                             <?= $form->field($modelOptionValue, "document_date")->widget(\kartik\date\DatePicker::className(), [
                                 'options' => [
                                     'autocomplete' => 'off',
@@ -52,13 +49,11 @@ $this->params['breadcrumbs'][] = 'Update';
                                     'style' => 'background:white',
                                     'class' => 'form-control document_date'
                                 ],
+                                'type' => \kartik\date\DatePicker::TYPE_COMPONENT_PREPEND,
                                 'pluginOptions' => [
-                                    'autoclose' => true,
-                                    'changemonth' => false,
-                                    'type' => \kartik\date\DatePicker::TYPE_COMPONENT_PREPEND,
-                                    'changeyear' => true,
                                     'format' => 'yyyy',
-                                    'yearrange' => '1990:2020'
+                                    'autoclose' => true,
+                                    'minViewMode' => 2,
                                 ]
                             ]) ?>
                         </div>

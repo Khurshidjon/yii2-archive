@@ -115,21 +115,50 @@
                         </div>
                     </div>
                 </div>
-                <div class="">
-                       <?= \yii\widgets\ListView::widget([
-                            'dataProvider' => $dataProvider,
-                            'pager' => [
-                                'class' => 'yii\bootstrap4\LinkPager',
-                                'options' => ['class' => ''],
-                            ],
-                           'layout' => '{items}<div class="shop-product-wrap grid-four with-pagination row space-db--30 shop-border"><div class="col-lg-3 col-sm-6"><div class="product-card"><div class="product-grid-content"></div></div>',
-                           'options' => [
-//                                'tag' => null, //{summary}
-                            ],
-                            'itemView' => function ($model, $key, $index, $widget) {
-                                return $this->render('_form',['model' => $model]);
-                            },
-                       ])?>
+                <div class="shop-product-wrap grid-four with-pagination row space-db--30 shop-border">
+                    <?php foreach ($files as $file):?>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="product-card">
+                                <div class="product-grid-content">
+                                    <div class="product-header">
+                                        <h3><a href="<?= \yii\helpers\Url::toRoute(['site/show', 'id' => $file->id])?>"><?= $file->title?></a></h3>
+                                    </div>
+                                    <div class="product-card--body">
+                                        <div class="card-image">
+                                           <div class="image-index-category-box">
+                                               <p class="image-index-category-title"><?= $file->category->title ?></p>
+                                           </div>
+                                            <img src="template/image/products/product-1.png" alt="">
+                                            <div class="hover-contents">
+                                                <a href="<?= \yii\helpers\Url::toRoute(['site/show', 'id' => $file->id])?>" class="hover-image">
+                                                    <img src="template/image/products/product-1.png" alt="">
+                                                </a>
+                                                <div class="hover-btns">
+                                                    <a href="https://telegram.me/share/url?url=<?=\yii\helpers\Url::to(["site/show", 'id' => $file->id], 'http')?>" class="single-btn">
+                                                        <i class="fab fa-telegram-plane"></i>
+                                                    </a>
+                                                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?=\yii\helpers\Url::to(["site/show", 'id' => $file->id], 'http')?>" class="single-btn">
+                                                        <i class="fab fa-facebook-f"></i>
+                                                    </a>
+                                                    <a href="<?= \yii\helpers\Url::toRoute(['/site/download-file', 'id' => $file->id])?>" class="single-btn">
+                                                        <i class="fas fa-download"></i>
+                                                    </a>
+                                                    <a href="#" data-toggle="modal" data-target="#quickModal"
+                                                       class="single-btn">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="price-block">
+                                            <span class="price" style="font-size: 15px"><?= $file->document_author?></span>
+                                            <span class="price-discount" style="font-size: 10px"><?= $file->document_date?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach;?>
                 </div>
                 <!-- Pagination Block -->
                 <div class="row pt--30">

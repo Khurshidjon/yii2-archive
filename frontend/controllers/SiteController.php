@@ -15,7 +15,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-use function Sodium\increment;
+use frontend\models\FilesSearch;
 
 /**
  * Site controller
@@ -80,10 +80,12 @@ class SiteController extends Controller
             'name' => 'File Archive',
             'content' => 'Description of the page...'
         ]);
-
-        $files = Files::find()->all();
+        $searchModel = new FilesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//        $dataProvider['dataProvider']->pagination->pageSize=1;
         return $this->render('index', [
-            'files' => $files
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -99,17 +101,66 @@ class SiteController extends Controller
         return $this->render('show', [
             'model' => $model
         ]);
-    }/**
+    }
+
+    /**
      * Displays homepage.
      *
      * @return mixed
      * @param $id
      */
-    public function actionDownload($id)
+    public function actionCategory($category_id)
     {
-        $file = Files::findOne($id)->download_count;
-        increment($file);
-        return 'ok';
+        $model = Files::find()->where($category_id);
+        return $this->render('show', [
+            'model' => $model
+        ]);
+    }
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     * @param $id
+     */
+    public function actionDownloadFile($id)
+    {
+
+        $model = Files::findOne($id);
+        $file = Yii::getAlias('@frontend/web').'/' . $model->file_path . '/' . $model->file_name . '.' . $model->file_extension;
+
+        if(file_exists($file)) {
+
+            header('Content-Description: File Transfer');
+
+            header('Content-Type: application/octet-stream');
+
+            header('Content-Disposition: attachment; filename='.$model->title . '.' . $model->file_extension);
+
+            header('Content-Transfer-Encoding: binary');
+
+            header('Expires: 0');
+
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+
+            header('Pragma: public');
+
+            header('Content-Length: ' . filesize($file));
+
+            ob_clean();
+
+            flush();
+
+            readfile($file);
+            $model->updateCounters(['download_count' => 1]);
+        } else {
+
+            header("HTTP/1.0 404 Not Found");
+
+            exit();
+
+        }
+
+        return $this->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
     }
 
     /**

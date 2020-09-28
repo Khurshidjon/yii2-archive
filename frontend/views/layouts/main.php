@@ -29,12 +29,12 @@ AppAssetArchive::register($this);
             <div class="header-middle pt--10 pb--10">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-lg-3 ">
-                            <a href="<?= Yii::$app->homeUrl?>" class="site-brand">
-                                <img src="/template/image/logo.png" alt="">
+                        <div class="col-lg-2">
+                            <a href="<?= Yii::$app->homeUrl?>" class="site-brand w-50">
+                                <img src="/template/image/unnamed.jpg" alt="">
                             </a>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="header-phone ">
                                 <div class="icon">
                                     <i class="fas fa-headphones-alt"></i>
@@ -48,69 +48,12 @@ AppAssetArchive::register($this);
                         <div class="col-lg-6">
                             <div class="main-navigation flex-lg-right">
                                 <ul class="main-menu menu-right ">
-                                    <li class="menu-item has-children">
-                                        <a href="javascript:void(0)">Home <i
-                                                    class="fas fa-chevron-down dropdown-arrow"></i></a>
-                                        <ul class="sub-menu">
-                                            <li> <a href="index.html">Home One</a></li>
-                                            <li> <a href="index-2.html">Home Two</a></li>
-                                            <li> <a href="index-3.html">Home Three</a></li>
-                                            <li> <a href="index-4.html">Home Four</a></li>
-                                        </ul>
-                                    </li>
-                                    <!-- Shop -->
-                                    <li class="menu-item has-children mega-menu">
-                                        <a href="javascript:void(0)">shop <i
-                                                    class="fas fa-chevron-down dropdown-arrow"></i></a>
-                                        <ul class="sub-menu four-column">
-                                            <li class="cus-col-25">
-                                                <h3 class="menu-title"><a href="javascript:void(0)">Shop Grid </a></h3>
-                                                <ul class="mega-single-block">
-                                                    <li><a href="shop-grid.html">Fullwidth</a></li>
-                                                    <li><a href="shop-grid-left-sidebar.html">left Sidebar</a></li>
-                                                    <li><a href="shop-grid-right-sidebar.html">Right Sidebar</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="cus-col-25">
-                                                <h3 class="menu-title"> <a href="javascript:void(0)">Shop List</a></h3>
-                                                <ul class="mega-single-block">
-                                                    <li><a href="shop-list.html">Fullwidth</a></li>
-                                                    <li><a href="shop-list-left-sidebar.html">left Sidebar</a></li>
-                                                    <li><a href="shop-list-right-sidebar.html">Right Sidebar</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="cus-col-25">
-                                                <h3 class="menu-title"> <a href="javascript:void(0)">Product Details
-                                                        1</a></h3>
-                                                <ul class="mega-single-block">
-                                                    <li><a href="product-details.html">Product Details Page</a></li>
-                                                    <li><a href="product-details-affiliate.html">Product Details
-                                                            Affiliate</a></li>
-                                                    <li><a href="product-details-group.html">Product Details Group</a>
-                                                    </li>
-                                                    <li><a href="product-details-variable.html">Product Details
-                                                            Variables</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="cus-col-25">
-                                                <h3 class="menu-title"><a href="javascript:void(0)">Product Details
-                                                        2</a></h3>
-                                                <ul class="mega-single-block">
-                                                    <li><a href="product-details-left-thumbnail.html">left Thumbnail</a>
-                                                    </li>
-                                                    <li><a href="product-details-right-thumbnail.html">Right
-                                                            Thumbnail</a></li>
-                                                    <li><a href="product-details-left-gallery.html">Left Gallery</a>
-                                                    </li>
-                                                    <li><a href="product-details-right-gallery.html">Right Gallery</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+                                    <li class="menu-item">
+                                        <a href="<?= Yii::$app->homeUrl?>">Бош саҳифа</a>
                                     </li>
                                     <!-- Pages -->
                                     <li class="menu-item has-children">
-                                        <a href="javascript:void(0)">Pages <i
+                                        <a href="javascript:void(0)">Саҳифалар <i
                                                     class="fas fa-chevron-down dropdown-arrow"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href="cart.html">Cart</a></li>
@@ -126,7 +69,7 @@ AppAssetArchive::register($this);
                                     </li>
                                     <!-- Blog -->
                                     <li class="menu-item has-children mega-menu">
-                                        <a href="javascript:void(0)">Blog <i
+                                        <a href="javascript:void(0)">Блог <i
                                                     class="fas fa-chevron-down dropdown-arrow"></i></a>
                                         <ul class="sub-menu three-column">
                                             <li class="cus-col-33">
@@ -159,7 +102,7 @@ AppAssetArchive::register($this);
                                         </ul>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="contact.html">Contact</a>
+                                        <a href="contact.html">Воғланиш</a>
                                     </li>
                                 </ul>
                             </div>
@@ -342,9 +285,9 @@ AppAssetArchive::register($this);
             <header class="mobile-header d-block d-lg-none pt--10 pb-md--10">
                 <div class="container">
                     <div class="row align-items-sm-end align-items-center">
-                        <div class="col-md-4 col-7">
-                            <a href="index.html" class="site-brand">
-                                <img src="template/image/logo.png" alt="">
+                        <div class="col-md-2 col-7">
+                            <a href="<?= Yii::$app->homeUrl?>" class="site-brand w-50">
+                                <img src="/template/image/unnamed.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-md-5 order-3 order-md-2">
@@ -543,12 +486,23 @@ AppAssetArchive::register($this);
         <div class="sticky-init fixed-header common-sticky">
             <div class="container d-none d-lg-block">
                 <div class="row align-items-center">
-                    <div class="col-lg-4">
-                        <a href="index.html" class="site-brand">
-                            <img src="template/image/logo.png" alt="">
+                    <div class="col-lg-2">
+                        <a href="<?= Yii::$app->homeUrl?>" class="site-brand w-50">
+                            <img src="template/image/unnamed.jpg"  alt="">
                         </a>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-4">
+                        <div class="header-phone ">
+                            <div class="icon">
+                                <i class="fas fa-headphones-alt"></i>
+                            </div>
+                            <div class="text">
+                                <p>Free Support 24/7</p>
+                                <p class="font-weight-bold number">+998901234567</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
                         <div class="main-navigation flex-lg-right">
                             <ul class="main-menu menu-right ">
                                 <li class="menu-item has-children">
@@ -737,8 +691,8 @@ AppAssetArchive::register($this);
                         <div class="footer-contact">
                             <p><span class="label">Address:</span><span class="text">Example Street 98, HH2 BacHa, New
 									York, USA</span></p>
-                            <p><span class="label">Phone:</span><span class="text">+18088 234 5678</span></p>
-                            <p><span class="label">Email:</span><span class="text">suport@hastech.com</span></p>
+                            <p><span class="label">Phone:</span><span class="text">+99890 123 45 67</span></p>
+                            <p><span class="label">Email:</span><span class="text">suport@files.uz</span></p>
                         </div>
                     </div>
                 </div>
@@ -781,7 +735,7 @@ AppAssetArchive::register($this);
                         </form>
                     </div>
                     <div class="social-block">
-                        <h3 class="title">STAY CONNECTED</h3>
+                        <h3 class="title">ижтимой тармоқларимиз</h3>
                         <ul class="social-list list-inline">
                             <li class="single-social facebook"><a href=""><i class="ion ion-social-facebook"></i></a>
                             </li>
@@ -796,12 +750,12 @@ AppAssetArchive::register($this);
         </div>
         <div class="footer-bottom">
             <div class="container">
-                <p class="copyright-heading">Suspendisse in auctor augue. Cras fermentum est ac fermentum tempor. Etiam
-                    vel magna volutpat, posuere eros</p>
+                <p class="copyright-heading">
+                    Suspendisse in auctor augue. Cras fermentum est ac fermentum tempor. Etiam vel magna volutpat, posuere eros</p>
                 <a href="#" class="payment-block">
                     <img src="template/image/icon/payment.png" alt="">
                 </a>
-                <p class="copyright-text">Copyright © 2019 <a href="#" class="author">Pustok</a>. All Right Reserved.
+                <p class="copyright-text">Copyright © <?= date("Y"); ?> <a href="#" class="author"></a>. All Right Reserved.
                     <br>
                     Design By Pustok</p>
             </div>

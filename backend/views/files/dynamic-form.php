@@ -56,9 +56,11 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                         'style' => 'background:white',
                                         'class' => 'form-control document_date'
                                     ],
+                                    'type' => \kartik\date\DatePicker::TYPE_COMPONENT_PREPEND,
                                     'pluginOptions' => [
+                                        'format' => 'yyyy',
                                         'autoclose' => true,
-                                        'format' => 'dd-mm-yyyy'
+                                        'minViewMode' => 2,
                                     ]
                                 ]) ?>
                             </div>

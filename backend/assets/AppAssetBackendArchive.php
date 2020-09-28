@@ -17,7 +17,7 @@ class AppAssetBackendArchive extends AssetBundle
         'css/style.css',
     ];
     public $js = [
-//        'scripts/main.js',
+        'scripts/main.js',
         'https://use.fontawesome.com/releases/v5.3.1/js/all.js',
         'https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'
     ];
