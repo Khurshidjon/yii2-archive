@@ -14,14 +14,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="inner-page-sidebar">
                     <!-- Accordion -->
                     <div class="single-block">
-                        <h3 class="sidebar-title">Categories</h3>
+                        <h3 class="sidebar-title">Категория</h3>
                         <ul class="sidebar-menu--shop">
                             <?php foreach (\common\models\Folders::find()->where(['parent_id' => null])->all() as $item):?>
-                                <li><a href="#"><?= $item->title ?> (<?= $item->fileCountChild?>)</a></li>
+                                <li><a href="<?= \yii\helpers\Url::toRoute(['/site/category', 'category_id' => $item->id])?>"><?= $item->title ?> (<?= $item->fileCountChild?>)</a></li>
                                 <?php if ($item->fileCountChild): ?>
                                     <ul class="inner-cat-items">
                                         <?php foreach ($item->children as $child):?>
-                                            <li><a href="#"><?= $child->title; ?> (<?= $child->fileCount?>)</a></li>
+                                            <li><a href="<?= \yii\helpers\Url::toRoute(['/site/category', 'category_id' => $child->id])?>"><?= $child->title; ?> (<?= $child->fileCount?>)</a></li>
                                         <?php endforeach;?>
                                     </ul>
                                 <?php endif?>

@@ -1,3 +1,6 @@
+<?php
+$this->title = 'Поиск'
+?>
 <main class="inner-page-sec-padding-bottom">
     <div class="container">
         <div class="row">
@@ -116,42 +119,42 @@
                     </div>
                 </div>
                 <div class="">
-                       <?= \yii\widgets\ListView::widget([
-                            'dataProvider' => $dataProvider,
-                            'pager' => [
-                                'class' => 'yii\bootstrap4\LinkPager',
-                                'options' => ['class' => ''],
-                            ],
-                           'layout' => '{items}<div class="shop-product-wrap grid-four with-pagination row space-db--30 shop-border"><div class="col-lg-3 col-sm-6"><div class="product-card"><div class="product-grid-content"></div></div>',
-                           'options' => [
+                    <?= \yii\widgets\ListView::widget([
+                        'dataProvider' => $dataProvider,
+                        'pager' => [
+                            'class' => 'yii\bootstrap4\LinkPager',
+                            'options' => ['class' => ''],
+                        ],
+                        'layout' => '{items}<div class="shop-product-wrap grid-four with-pagination row space-db--30 shop-border"><div class="col-lg-3 col-sm-6"><div class="product-card"><div class="product-grid-content"></div></div>',
+                        'options' => [
 //                                'tag' => null, //{summary}
-                            ],
-                            'itemView' => function ($model, $key, $index, $widget) {
-                                return $this->render('_form',['model' => $model]);
-                            },
-                       ])?>
+                        ],
+                        'itemView' => function ($model, $key, $index, $widget) {
+                            return $this->render('_form',['model' => $model]);
+                        },
+                    ])?>
                 </div>
                 <!-- Pagination Block -->
-                <div class="row pt--30">
-                    <div class="col-md-12">
-                        <div class="pagination-block">
-                            <ul class="pagination-btns flex-center">
-                                <li><a href="" class="single-btn prev-btn ">|<i
-                                                class="zmdi zmdi-chevron-left"></i> </a></li>
-                                <li><a href="" class="single-btn prev-btn "><i
-                                                class="zmdi zmdi-chevron-left"></i> </a></li>
-                                <li class="active"><a href="" class="single-btn">1</a></li>
-                                <li><a href="" class="single-btn">2</a></li>
-                                <li><a href="" class="single-btn">3</a></li>
-                                <li><a href="" class="single-btn">4</a></li>
-                                <li><a href="" class="single-btn next-btn"><i
-                                                class="zmdi zmdi-chevron-right"></i></a></li>
-                                <li><a href="" class="single-btn next-btn"><i
-                                                class="zmdi zmdi-chevron-right"></i>|</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="row pt--30">-->
+<!--                    <div class="col-md-12">-->
+<!--                        <div class="pagination-block">-->
+<!--                            <ul class="pagination-btns flex-center">-->
+<!--                                <li><a href="" class="single-btn prev-btn ">|<i-->
+<!--                                                class="zmdi zmdi-chevron-left"></i> </a></li>-->
+<!--                                <li><a href="" class="single-btn prev-btn "><i-->
+<!--                                                class="zmdi zmdi-chevron-left"></i> </a></li>-->
+<!--                                <li class="active"><a href="" class="single-btn">1</a></li>-->
+<!--                                <li><a href="" class="single-btn">2</a></li>-->
+<!--                                <li><a href="" class="single-btn">3</a></li>-->
+<!--                                <li><a href="" class="single-btn">4</a></li>-->
+<!--                                <li><a href="" class="single-btn next-btn"><i-->
+<!--                                                class="zmdi zmdi-chevron-right"></i></a></li>-->
+<!--                                <li><a href="" class="single-btn next-btn"><i-->
+<!--                                                class="zmdi zmdi-chevron-right"></i>|</a></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <!-- Modal -->
                 <div class="modal fade modal-quick-view" id="quickModal" tabindex="-1" role="dialog"
                      aria-labelledby="quickModal" aria-hidden="true">
@@ -164,7 +167,7 @@
                                 <div class="row">
                                     <div class="col-lg-5">
                                         <div class="product-details-slider sb-slick-slider arrow-type-two"
-                                                data-slick-setting='{
+                                             data-slick-setting='{
                                                   "slidesToShow": 1,
                                                   "arrows": false,
                                                   "fade": true,
@@ -173,19 +176,19 @@
                                                   "asNavFor": ".product-slider-nav"
                                                 }'>
                                             <div class="single-slide">
-                                                <img src="template/image/products/product-1.png" alt="">
+                                                <img src="/template/image/products/product-1.png" alt="">
                                             </div>
                                             <div class="single-slide">
-                                                <img src="template/image/products/product-1.png" alt="">
+                                                <img src="/template/image/products/product-1.png" alt="">
                                             </div>
                                             <div class="single-slide">
-                                                <img src="template/image/products/product-1.png" alt="">
+                                                <img src="/template/image/products/product-1.png" alt="">
                                             </div>
                                             <div class="single-slide">
-                                                <img src="template/image/products/product-1.png" alt="">
+                                                <img src="/template/image/products/product-1.png" alt="">
                                             </div>
                                             <div class="single-slide">
-                                                <img src="template/image/products/product-1.png" alt="">
+                                                <img src="/template/image/products/product-1.png" alt="">
                                             </div>
                                         </div>
                                         <!-- Product Details Slider Nav -->

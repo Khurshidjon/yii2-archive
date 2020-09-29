@@ -82,7 +82,7 @@ class SiteController extends Controller
         ]);
         $searchModel = new FilesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-//        $dataProvider['dataProvider']->pagination->pageSize=1;
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -111,11 +111,33 @@ class SiteController extends Controller
      */
     public function actionCategory($category_id)
     {
-        $model = Files::find()->where($category_id);
-        return $this->render('show', [
-            'model' => $model
+        $searchModel = new FilesSearch();
+        $dataProvider = $searchModel->category(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=8;
+
+        return $this->render('category', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
+
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     * @param $id
+     */
+    public function actionSearch()
+    {
+        $searchModel = new FilesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//        $dataProvider->pagination->pageSize=8;
+        return $this->render('result', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays homepage.
      *

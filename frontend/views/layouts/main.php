@@ -16,12 +16,11 @@ AppAssetArchive::register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
-    <?php $this->title = 'Бош саҳифа' ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
+<?php $this->beginBody();?>
 
 <div class="wrap">
     <div class="site-wrapper" id="top">
@@ -40,7 +39,7 @@ AppAssetArchive::register($this);
                                     <i class="fas fa-headphones-alt"></i>
                                 </div>
                                 <div class="text">
-                                    <p>Free Support 24/7</p>
+                                    <p>Қўллаб қувватлаш 24/7</p>
                                     <p class="font-weight-bold number">+998901234567</p>
                                 </div>
                             </div>
@@ -226,8 +225,10 @@ AppAssetArchive::register($this);
                         </div>-->
                         <div class="col-lg-8">
                             <div class="header-search-block">
-                                <input type="text" placeholder="Номи бўйича қидириш...">
-                                <button>қидириш</button>
+                                <form action="<?= \yii\helpers\Url::toRoute(['/site/search'])?>">
+                                    <input type="text" name="FilesSearch[title]" value="<?= Yii::$app->request->queryParams!=null ? Yii::$app->request->queryParams['FilesSearch']['title']:''?>" placeholder="Номи бўйича қидириш...">
+                                    <button type="submit" class="search-btn">қидириш</button>
+                                </form>
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -267,8 +268,9 @@ AppAssetArchive::register($this);
                                                 </div>
                                                 <div class=" single-cart-block ">
                                                     <div class="btn-block">
-                                                        <a href="checkout.html" class="btn btn--primary">Выход <i
-                                                                    class="fas fa-chevron-right"></i></a>
+                                                        <?= Html::beginForm(['/site/logout'], 'post');?>
+                                                        <?= Html::submitButton('Выход <i class="fas fa-chevron-right"></i>', ['class' => 'btn btn--primary']);?>
+                                                        <?= Html::endForm();?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -324,8 +326,8 @@ AppAssetArchive::register($this);
                 <div class="off-canvas-inner">
                     <!-- search box start -->
                     <div class="search-box offcanvas">
-                        <form>
-                            <input type="text" placeholder="Search Here">
+                        <form action="<?= \yii\helpers\Url::toRoute(['/site/search'])?>">
+                            <input type="text" name="FileSearch[title]" value="<?= Yii::$app->request->queryParams!=null ? Yii::$app->request->queryParams['q']:''?>" placeholder="Search Here">
                             <button class="search-btn"><i class="ion-ios-search-strong"></i></button>
                         </form>
                     </div>
@@ -497,7 +499,7 @@ AppAssetArchive::register($this);
                                 <i class="fas fa-headphones-alt"></i>
                             </div>
                             <div class="text">
-                                <p>Free Support 24/7</p>
+                                <p>Қўллаб қувватлаш 24/7</p>
                                 <p class="font-weight-bold number">+998901234567</p>
                             </div>
                         </div>
