@@ -1,3 +1,6 @@
+<?php
+$this->title = 'Бош саҳифа'
+?>
 <main class="inner-page-sec-padding-bottom">
     <div class="container">
         <div class="row">
