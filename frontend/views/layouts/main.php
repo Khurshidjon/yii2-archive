@@ -226,7 +226,7 @@ AppAssetArchive::register($this);
                         <div class="col-lg-8">
                             <div class="header-search-block">
                                 <form action="<?= \yii\helpers\Url::toRoute(['/site/search'])?>">
-                                    <input type="text" name="FilesSearch[title]" value="<?= Yii::$app->request->queryParams!=null ? Yii::$app->request->queryParams['FilesSearch']['title']:''?>" placeholder="Номи бўйича қидириш...">
+                                    <input type="text" name="FileSearch[title]" value="<?= Yii::$app->request->get('FileSearch') ? Yii::$app->request->queryParams['FileSearch']['title']:''?>" placeholder="Номи бўйича қидириш...">
                                     <button type="submit" class="search-btn">қидириш</button>
                                 </form>
                             </div>
@@ -327,7 +327,7 @@ AppAssetArchive::register($this);
                     <!-- search box start -->
                     <div class="search-box offcanvas">
                         <form action="<?= \yii\helpers\Url::toRoute(['/site/search'])?>">
-                            <input type="text" name="FileSearch[title]" value="<?= !empty(Yii::$app->request->queryParams) ? Yii::$app->request->queryParams['q']:''?>" placeholder="Search Here">
+                            <input type="text" name="FileSearch[title]" value="<?= Yii::$app->request->get('FileSearch') ? Yii::$app->request->queryParams['FileSearch']['title']:''?>" placeholder="Номи бўйича қидириш...">
                             <button class="search-btn"><i class="ion-ios-search-strong"></i></button>
                         </form>
                     </div>
