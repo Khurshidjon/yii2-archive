@@ -96,8 +96,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </div>
                                 <div class="compare-wishlist-row">
                                     <a href="javascript::void(0)" class="add-link">Улашиш:</a>
-                                    <a href="https://telegram.me/share/url?url=<?=\yii\helpers\Url::to(["site/show", 'id' => $model->id], 'http')?>" class="add-link"><i class="fab fa-telegram-plane fa-2x"></i></a>
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?=\yii\helpers\Url::to(["site/show", 'id' => $model->id], 'http')?>" class="add-link"><i class="fab fa-facebook fa-2x"></i></a>
+                                    <a target="_blank" href="https://telegram.me/share/url?url=<?=\yii\helpers\Url::to(["site/show", 'id' => $model->id], 'http')?>" class="add-link"><i class="fab fa-telegram-plane fa-2x"></i></a>
+                                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?=\yii\helpers\Url::to(["site/show", 'id' => $model->id], 'http')?>" class="add-link"><i class="fab fa-facebook fa-2x"></i></a>
                                 </div>
                             </div>
                         </div>

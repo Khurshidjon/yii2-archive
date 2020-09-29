@@ -13,10 +13,10 @@
                             <img src="/template/image/products/product-1.png" alt="">
                         </a>
                         <div class="hover-btns">
-                            <a href="https://telegram.me/share/url?url=<?=\yii\helpers\Url::to(["site/show", 'id' => $model->id], 'http')?>" class="single-btn">
+                            <a target="_blank" href="https://telegram.me/share/url?url=<?=\yii\helpers\Url::to(["site/show", 'id' => $model->id], 'http')?>" class="single-btn">
                                 <i class="fab fa-telegram-plane"></i>
                             </a>
-                            <a href="https://www.facebook.com/sharer/sharer.php?u=<?=\yii\helpers\Url::to(["site/show", 'id' => $model->id], 'http')?>" class="single-btn">
+                            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?=\yii\helpers\Url::to(["site/show", 'id' => $model->id], 'http')?>" class="single-btn">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
                             <a href="<?= \yii\helpers\Url::toRoute(['/site/download-file', 'id' => $model->id])?>" class="single-btn">
