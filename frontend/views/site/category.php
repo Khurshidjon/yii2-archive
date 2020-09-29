@@ -135,7 +135,7 @@ $this->title = 'Категория'
                     ])?>
                 </div>
                 <!-- Pagination Block -->
-                <div class="row pt--30">
+            <!--    <div class="row pt--30">
                     <div class="col-md-12">
                         <div class="pagination-block">
                             <ul class="pagination-btns flex-center">
@@ -154,7 +154,7 @@ $this->title = 'Категория'
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <!-- Modal -->
                 <div class="modal fade modal-quick-view" id="quickModal" tabindex="-1" role="dialog"
                      aria-labelledby="quickModal" aria-hidden="true">
