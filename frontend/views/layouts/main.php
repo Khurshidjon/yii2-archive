@@ -687,8 +687,8 @@ AppAssetArchive::register($this);
             <div class="row justify-content-between  section-padding">
                 <div class=" col-xl-3 col-lg-4 col-sm-6">
                     <div class="single-footer pb--40">
-                        <div class="brand-footer footer-title">
-                            <img src="template/image/logo--footer.png" alt="">
+                        <div class="brand-footer footer-title w-25">
+                            <img src="/template/image/unnamed.jpg" alt="">
                         </div>
                         <div class="footer-contact">
                             <p><span class="label">Address:</span><span class="text">Example Street 98, HH2 BacHa, New
