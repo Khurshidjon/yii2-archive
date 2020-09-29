@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                           }'>
                                 <div class="single-slide">
                                     <div class="image-index-category-box">
-                                        <p class="image-show-category-title"><?= $model->category->title ?></p>
+                                        <p class="image-show-category-title"><?= $model->title ?></p>
                                     </div>
                                     <img src="/template/image/products/product-1.png" alt="">
                                 </div>
