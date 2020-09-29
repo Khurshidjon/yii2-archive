@@ -1,9 +1,7 @@
 <div class="col-lg-3 col-sm-6 mb-5">
     <div class="product-card">
         <div class="product-grid-content">
-            <div class="product-header">
-<!--                <h3><a style="margin-bottom: 5px; font-size: 13px" href="--><?//= \yii\helpers\Url::toRoute(['site/show', 'id' => $model->id])?><!--">--><?//= $model->category->title?><!--</a></h3>-->
-            </div>
+            <div class="product-header"></div>
             <div class="product-card--body">
                 <div class="card-image">
                     <div class="image-index-category-box">
@@ -33,7 +31,6 @@
                 </div>
                 <div class="price-block" style="margin-top: 10px">
                     <span class="price" style="font-size: 12px"><span class="text-danger">Юклашлар сони:</span> <?= $model->download_count?></span>
-<!--                    <span class="price-discount" style="font-size: 9px">--><?//= $model->document_date?><!--</span>-->
                 </div>
             </div>
         </div>
