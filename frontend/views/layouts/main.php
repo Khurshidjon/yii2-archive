@@ -327,7 +327,7 @@ AppAssetArchive::register($this);
                     <!-- search box start -->
                     <div class="search-box offcanvas">
                         <form action="<?= \yii\helpers\Url::toRoute(['/site/search'])?>">
-                            <input type="text" name="FileSearch[title]" value="<?= Yii::$app->request->queryParams!=null ? Yii::$app->request->queryParams['q']:''?>" placeholder="Search Here">
+                            <input type="text" name="FileSearch[title]" value="<?= !empty(Yii::$app->request->queryParams) ? Yii::$app->request->queryParams['q']:''?>" placeholder="Search Here">
                             <button class="search-btn"><i class="ion-ios-search-strong"></i></button>
                         </form>
                     </div>
